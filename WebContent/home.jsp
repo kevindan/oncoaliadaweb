@@ -36,7 +36,7 @@
 	HttpSession sesion = request.getSession();
 	UsuarioView usuarioView = new UsuarioView();
 	
-	if(sesion.getAttribute("usuario")!=null && sesion.getAttribute("tipo_usuario")!=null && sesion.getAttribute("nombrecompleto")!= null){
+	if(sesion.getAttribute("id_usuario")!=null && sesion.getAttribute("usuario")!=null && sesion.getAttribute("tipo_usuario")!=null && sesion.getAttribute("nombrecompleto")!= null){
 		usuarioView.setUsuario(sesion.getAttribute("usuario").toString());
 		usuarioView.setNombrecompleto(sesion.getAttribute("nombrecompleto").toString());
 		usuarioView.setTipo_usuario(sesion.getAttribute("tipo_usuario").toString());
@@ -46,6 +46,11 @@
 		out.print("<script>location.replace('login.jsp');</script>");
 	}
 %>
+
+<input type="hidden" id="id_usuario" value="<%=usuarioView.getId_usuario()%>">
+<input type="hidden" id="usuario" value="<%=usuarioView.getUsuario()%>">
+<input type="hidden" id="tipo_usuario" value="<%=usuarioView.getTipo_usuario()%>"> 
+
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">

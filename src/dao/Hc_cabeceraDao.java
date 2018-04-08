@@ -40,8 +40,9 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+ " organo_tercera_enfermedad_progresiva, tratamiento_tercera_enfermedad_progresiva, tecnica_radioterapia_tercera_enfermedad_progresiva, "
 					+ " dosis_radioterapia_tercera_enfermedad_progresiva, fecha_cuarta_enfermedad_progresiva, psa_cuarta_enfermedad_progresiva, "
 					+ " sintomatico_cuarta_enfermedad_progresiva, cuarta_enfermedad_progresiva_oligometastasico, organo_cuarta_enfermedad_progresiva, "
-					+ " tratamiento_cuarta_enfermedad_progresiva, tecnica_radioterapia_cuarta_enfermedad_progresiva, dosis_radioterapia_cuarta_enfermedad_progresiva)  "
-					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+					+ " tratamiento_cuarta_enfermedad_progresiva, tecnica_radioterapia_cuarta_enfermedad_progresiva, dosis_radioterapia_cuarta_enfermedad_progresiva, "
+					+ " usuario,fecha_registro)  "
+					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate()) ";
 
 			PreparedStatement pstm = cn.prepareStatement(sql);
 
@@ -114,6 +115,8 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			pstm.setInt(67, o.getTratamiento_cuarta_enfermedad_progresiva());
 			pstm.setInt(68, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
 			pstm.setDouble(69, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
+			
+			pstm.setString(70, o.getUsuario());
 
 			pstm.executeUpdate();
 
@@ -217,8 +220,10 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+"organo_cuarta_enfermedad_progresiva = ?, "
 					+"tratamiento_cuarta_enfermedad_progresiva = ?, "
 					+"tecnica_radioterapia_cuarta_enfermedad_progresiva = ?, "
-					+"dosis_radioterapia_cuarta_enfermedad_progresiva = ? "
-					+ " where hc_cabecera_id = ? and activo = 1 ";
+					+"dosis_radioterapia_cuarta_enfermedad_progresiva = ? ,"
+					+"usuario = ?,"
+					+"fecha_ultima_actualizacion = sysdate() "
+					+" where hc_cabecera_id = ? and activo = 1 ";
 					
 
 			PreparedStatement pstm = cn.prepareStatement(sql);
@@ -291,8 +296,10 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			pstm.setInt(66, o.getTratamiento_cuarta_enfermedad_progresiva());
 			pstm.setInt(67, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
 			pstm.setDouble(68, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
+			pstm.setString(69, o.getUsuario());
 			
-			pstm.setInt(69, o.getHc_cabecera_id());
+			
+			pstm.setInt(70, o.getHc_cabecera_id());
 			
 			pstm.executeUpdate();
 
@@ -330,11 +337,12 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 
 			cn.setAutoCommit(false);
 
-			String sql = "update hc_cabecera set activo = 0 where hc_cabecera_id = ? ";
+			String sql = "update hc_cabecera set activo = 0, usuario = ?, fecha_ultima_modificacion = sysdate() where hc_cabecera_id = ? ";
 
 			PreparedStatement pstm = cn.prepareStatement(sql);
 
-			pstm.setInt(1, o.getHc_cabecera_id());
+			pstm.setString(1, o.getUsuario());
+			pstm.setInt(2, o.getHc_cabecera_id());
 
 			pstm.executeUpdate();
 
@@ -374,7 +382,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			String sql = " select hc_cabecera.hc_cabecera_id,paciente.paciente_id,  "
 					+ " paciente.numero_documento, paciente.nombres, paciente.apellido_paterno,"
 					+ " paciente.apellido_materno, paciente.codigo_cieo, "
-					+ " diagnostico.descripcion, hc_cabecera.fecha_ultimo_control "
+					+ " diagnostico.descripcion, hc_cabecera.fecha_ultimo_control,usuario "
 					+ " from hc_cabecera, paciente, diagnostico "
 					+ " where hc_cabecera.paciente_id = paciente.paciente_id and "
 					+ " paciente.codigo_cieo = diagnostico.codigo_cieo and "
@@ -395,6 +403,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 				hc_cabeceraVista.setCodigo_cieo(rs.getString("codigo_cieo"));
 				hc_cabeceraVista.setDescripcion(rs.getString("descripcion"));
 				hc_cabeceraVista.setFecha_ultimo_control(rs.getString("fecha_ultimo_control"));
+				hc_cabeceraVista.setUsuario(rs.getString("usuario"));
 
 				lista.add(hc_cabeceraVista);
 			}

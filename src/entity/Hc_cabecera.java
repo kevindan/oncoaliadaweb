@@ -72,12 +72,15 @@ public class Hc_cabecera {
 	private int tratamiento_cuarta_enfermedad_progresiva;
 	private int tecnica_radioterapia_cuarta_enfermedad_progresiva;
 	private double dosis_radioterapia_cuarta_enfermedad_progresiva;
+	private String usuario;
+	private String fecha_registro;
+	private String fecha_ultima_modificacion;
 	private int activo;
 	
 	public Hc_cabecera() {
 		
 	}
-	
+
 	public Hc_cabecera(int hc_cabecera_id, int paciente_id, int antecedente_raza, int raza_id, int antecedente_familiar,
 			String descripcion_familiar, int antecedente_genes, int antecedente_alimentacion, int antecedente_obesidad,
 			double imc, int antecedente_exposicion_trabajo, int antecedente_exposicion_trabajo_detalle,
@@ -103,8 +106,9 @@ public class Hc_cabecera {
 			double psa_cuarta_enfermedad_progresiva, int sintomatico_cuarta_enfermedad_progresiva,
 			int cuarta_enfermedad_progresiva_oligometastasico, int organo_cuarta_enfermedad_progresiva,
 			int tratamiento_cuarta_enfermedad_progresiva, int tecnica_radioterapia_cuarta_enfermedad_progresiva,
-			double dosis_radioterapia_cuarta_enfermedad_progresiva, int activo) {
-	
+			double dosis_radioterapia_cuarta_enfermedad_progresiva, String usuario, String fecha_registro,
+			String fecha_ultima_modificacion, int activo) {
+		super();
 		this.hc_cabecera_id = hc_cabecera_id;
 		this.paciente_id = paciente_id;
 		this.antecedente_raza = antecedente_raza;
@@ -175,10 +179,11 @@ public class Hc_cabecera {
 		this.tratamiento_cuarta_enfermedad_progresiva = tratamiento_cuarta_enfermedad_progresiva;
 		this.tecnica_radioterapia_cuarta_enfermedad_progresiva = tecnica_radioterapia_cuarta_enfermedad_progresiva;
 		this.dosis_radioterapia_cuarta_enfermedad_progresiva = dosis_radioterapia_cuarta_enfermedad_progresiva;
+		this.usuario = usuario;
+		this.fecha_registro = fecha_registro;
+		this.fecha_ultima_modificacion = fecha_ultima_modificacion;
 		this.activo = activo;
 	}
-
-
 
 	public int getHc_cabecera_id() {
 		return hc_cabecera_id;
@@ -745,6 +750,30 @@ public class Hc_cabecera {
 		this.dosis_radioterapia_cuarta_enfermedad_progresiva = dosis_radioterapia_cuarta_enfermedad_progresiva;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getFecha_registro() {
+		return fecha_registro;
+	}
+
+	public void setFecha_registro(String fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
+
+	public String getFecha_ultima_modificacion() {
+		return fecha_ultima_modificacion;
+	}
+
+	public void setFecha_ultima_modificacion(String fecha_ultima_modificacion) {
+		this.fecha_ultima_modificacion = fecha_ultima_modificacion;
+	}
+
 	public int getActivo() {
 		return activo;
 	}
@@ -752,5 +781,5 @@ public class Hc_cabecera {
 	public void setActivo(int activo) {
 		this.activo = activo;
 	}
-	
+
 }

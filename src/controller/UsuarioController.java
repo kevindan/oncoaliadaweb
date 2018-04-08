@@ -46,6 +46,8 @@ public class UsuarioController extends HttpServlet {
 		String cerrar = request.getParameter("cerrar");
 
 		if (cerrar != null) {
+			
+			request.getSession().removeAttribute("id_usuario");
 			request.getSession().removeAttribute("usuario");
 			request.getSession().removeAttribute("tipo_usuario");
 			request.getSession().removeAttribute("nombrecompleto");
@@ -117,8 +119,10 @@ public class UsuarioController extends HttpServlet {
 				usuarioDao = new UsuarioDao();
 				usuarioView = new UsuarioView();
 				usuarioView = usuarioDao.Autenticar(usu);
+				
 				if (usuarioView.getNombrecompleto() != null) {
 
+					sesion.setAttribute("id_usuario", usuarioView.getId_usuario());
 					sesion.setAttribute("usuario", usuarioView.getUsuario());
 					sesion.setAttribute("nombrecompleto", usuarioView.getNombrecompleto());
 					sesion.setAttribute("tipo_usuario", usuarioView.getTipo_usuario());

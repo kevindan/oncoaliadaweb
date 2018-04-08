@@ -11,6 +11,7 @@ public class Hc_cabeceraVista {
     private String codigo_cieo;
     private String descripcion;
     private String fecha_ultimo_control;
+    private String usuario;
 
     public Hc_cabeceraVista() {
 
@@ -18,8 +19,8 @@ public class Hc_cabeceraVista {
 
 	public Hc_cabeceraVista(int hc_cabecera_id, int paciente_id, String numero_documento, String nombres,
 			String apellido_paterno, String apellido_materno, String codigo_cieo, String descripcion,
-			String fecha_ultimo_control) {
-		
+			String fecha_ultimo_control, String usuario) {
+		super();
 		this.hc_cabecera_id = hc_cabecera_id;
 		this.paciente_id = paciente_id;
 		this.numero_documento = numero_documento;
@@ -29,6 +30,7 @@ public class Hc_cabeceraVista {
 		this.codigo_cieo = codigo_cieo;
 		this.descripcion = descripcion;
 		this.fecha_ultimo_control = fecha_ultimo_control;
+		this.usuario = usuario;
 	}
 
 	public int getHc_cabecera_id() {
@@ -102,6 +104,13 @@ public class Hc_cabeceraVista {
 	public void setFecha_ultimo_control(String fecha_ultimo_control) {
 		this.fecha_ultimo_control = fecha_ultimo_control;
 	}
-    
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 	
 }

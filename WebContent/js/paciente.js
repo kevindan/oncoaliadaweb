@@ -30,6 +30,7 @@ function guardar_paciente(){
 	var codigo_ubigeoVar = $('#departamento_lista').val()+$('#provincia_lista').val()+$('#distrito_lista').val();
 	var fecha_diagnosticoVar = $('#fecha_diagnostico').val();
 	var observacionVar = $('#observacion').val();
+	var usuarioVar = $('#usuario').val();
 	
 	if(numero_documentoVar == ''){
 		
@@ -97,7 +98,8 @@ function guardar_paciente(){
 	codigo_cieo	: codigo_cieoVar ,
 	codigo_ubigeo	: codigo_ubigeoVar,
 	fecha_diagnostico	: fecha_diagnosticoVar ,
-	observacion	: observacionVar 
+	observacion	: observacionVar,
+	usuario : usuarioVar
 
 			}, function(response) {
 				

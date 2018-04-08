@@ -130,6 +130,7 @@ public class PacienteController extends HttpServlet {
 			paciente.setCodigo_ubigeo(request.getParameter("codigo_ubigeo"));
 			paciente.setFecha_diagnostico(fechaToTexto(textoTofecha(request.getParameter("fecha_diagnostico"))));
 			paciente.setObservacion(request.getParameter("observacion"));
+			paciente.setUsuario(request.getParameter("usuario"));
 			
 			String operacion = request.getParameter("operacion");
 			

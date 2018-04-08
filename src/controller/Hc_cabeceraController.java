@@ -354,6 +354,7 @@ public class Hc_cabeceraController extends HttpServlet {
 				hc_cabecera.setDosis_radioterapia_cuarta_enfermedad_progresiva(Double.parseDouble(request.getParameter("dosis_radioterapia_cuarta_enfermedad_progresiva")));
 			}
 			
+			hc_cabecera.setUsuario(request.getParameter("usuario"));
 			
 			String operacion = request.getParameter("operacion");
 

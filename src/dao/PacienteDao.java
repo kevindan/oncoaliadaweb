@@ -23,8 +23,9 @@ public class PacienteDao implements Intermetodos<Paciente> {
                     + " nombres,apellido_paterno,apellido_materno,sexo,fecha_nacimiento, "
                     + " direccion,telefono,fecha_registro, "
                     + " tipo_paciente,fallecido, "
-                    + " base_diagnostico_id,codigo_cieo,codigo_ubigeo,fecha_diagnostico,observacion,eliminado) "
-                    + " values(?,?,?,?,?,?,?,?,?,sysdate(),?,0,?,?,?,?,?,0) ";
+                    + " base_diagnostico_id,codigo_cieo,codigo_ubigeo,fecha_diagnostico,"
+                    + " observacion,usuario,eliminado) "
+                    + " values(?,?,?,?,?,?,?,?,?,sysdate(),?,0,?,?,?,?,?,?,0) ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
 
@@ -43,6 +44,8 @@ public class PacienteDao implements Intermetodos<Paciente> {
             pstm.setString(13, o.getCodigo_ubigeo());
             pstm.setString(14, o.getFecha_diagnostico());
             pstm.setString(15, o.getObservacion());
+            pstm.setString(16, o.getUsuario());
+            
    
             pstm.executeUpdate();
 
@@ -79,6 +82,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
                     + " tipo_paciente = ?, "
                     + " base_diagnostico_id = ?, "
                     + " codigo_cieo = ?,codigo_ubigeo = ?,fecha_diagnostico = ?,observacion = ? "
+                    + " usuario =?,fecha_ultima_modificacion = sysdate() "
                     + " where paciente_id = ? and eliminado = 0 ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
@@ -96,9 +100,10 @@ public class PacienteDao implements Intermetodos<Paciente> {
             pstm.setString(11, o.getCodigo_ubigeo());
             pstm.setString(12, o.getFecha_diagnostico());
             pstm.setString(13, o.getObservacion());
-        
+            pstm.setString(14, o.getUsuario());
+           
 
-            pstm.setInt(14, o.getPaciente_id());
+            pstm.setInt(15, o.getPaciente_id());
 
             pstm.executeUpdate();
 
@@ -129,13 +134,14 @@ public class PacienteDao implements Intermetodos<Paciente> {
         try {
             cn = DataAccess.getConnection();
 
-            String sql = " update paciente set eliminado = 1 "
+            String sql = " update paciente set eliminado = 1, usuario = ?, fecha_ultima_modificacion = sysdate() "
                     + " where paciente_id = ? ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
 
             pstm.setInt(1, o.getPaciente_id());
-
+            pstm.setString(2, o.getUsuario());
+            
             pstm.executeUpdate();
 
             pstm.close();
@@ -161,7 +167,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
             cn = DataAccess.getConnection();
             //comando sql
             String sql = " select paciente_id,numero_documento,nombres,"
-                    + " apellido_paterno,apellido_materno,fecha_nacimiento "
+                    + " apellido_paterno,apellido_materno,fecha_nacimiento,usuario "
                     + " from paciente where eliminado = 0 order by nombres asc ";
             // crear statement
             Statement stm = cn.createStatement();
@@ -176,6 +182,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
                 p.setApellido_paterno(rs.getString("apellido_paterno"));
                 p.setApellido_materno(rs.getString("apellido_materno"));
                 p.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
+                p.setUsuario(rs.getString("usuario"));
 
                 lista.add(p);
             }
