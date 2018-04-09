@@ -297,8 +297,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			pstm.setInt(67, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
 			pstm.setDouble(68, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
 			pstm.setString(69, o.getUsuario());
-			
-			
+						
 			pstm.setInt(70, o.getHc_cabecera_id());
 			
 			pstm.executeUpdate();
@@ -382,7 +381,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			String sql = " select hc_cabecera.hc_cabecera_id,paciente.paciente_id,  "
 					+ " paciente.numero_documento, paciente.nombres, paciente.apellido_paterno,"
 					+ " paciente.apellido_materno, paciente.codigo_cieo, "
-					+ " diagnostico.descripcion, hc_cabecera.fecha_ultimo_control,usuario "
+					+ " diagnostico.descripcion, hc_cabecera.fecha_ultimo_control,hc_cabecera.usuario "
 					+ " from hc_cabecera, paciente, diagnostico "
 					+ " where hc_cabecera.paciente_id = paciente.paciente_id and "
 					+ " paciente.codigo_cieo = diagnostico.codigo_cieo and "

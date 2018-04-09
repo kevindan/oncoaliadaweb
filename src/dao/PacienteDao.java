@@ -76,34 +76,35 @@ public class PacienteDao implements Intermetodos<Paciente> {
         try {
             cn = DataAccess.getConnection();
             cn.setAutoCommit(false);
-            String sql = " update paciente set nombres = ?, apellido_paterno = ?, "
+            String sql = " update paciente set numero_documento = ?, nombres = ?, apellido_paterno = ?, "
                     + " apellido_materno = ?,sexo = ?,fecha_nacimiento = ?, "
                     + " direccion = ?,telefono = ?, "
                     + " tipo_paciente = ?, "
                     + " base_diagnostico_id = ?, "
-                    + " codigo_cieo = ?,codigo_ubigeo = ?,fecha_diagnostico = ?,observacion = ? "
+                    + " codigo_cieo = ?,codigo_ubigeo = ?,fecha_diagnostico = ?,observacion = ?, "
                     + " usuario =?,fecha_ultima_modificacion = sysdate() "
                     + " where paciente_id = ? and eliminado = 0 ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
-
-            pstm.setString(1, o.getNombres());
-            pstm.setString(2, o.getApellido_paterno());
-            pstm.setString(3, o.getApellido_materno());
-            pstm.setString(4, o.getSexo());
-            pstm.setString(5, o.getFecha_nacimiento());
-            pstm.setString(6, o.getDireccion());
-            pstm.setString(7, o.getTelefono());  
-            pstm.setInt(8, o.getTipo_paciente());
-            pstm.setInt(9, o.getBase_diagnostico_id());
-            pstm.setString(10, o.getCodigo_cieo());
-            pstm.setString(11, o.getCodigo_ubigeo());
-            pstm.setString(12, o.getFecha_diagnostico());
-            pstm.setString(13, o.getObservacion());
-            pstm.setString(14, o.getUsuario());
+            
+            pstm.setString(1, o.getNumero_documento());
+            pstm.setString(2, o.getNombres());
+            pstm.setString(3, o.getApellido_paterno());
+            pstm.setString(4, o.getApellido_materno());
+            pstm.setString(5, o.getSexo());
+            pstm.setString(6, o.getFecha_nacimiento());
+            pstm.setString(7, o.getDireccion());
+            pstm.setString(8, o.getTelefono());  
+            pstm.setInt(9, o.getTipo_paciente());
+            pstm.setInt(10, o.getBase_diagnostico_id());
+            pstm.setString(11, o.getCodigo_cieo());
+            pstm.setString(12, o.getCodigo_ubigeo());
+            pstm.setString(13, o.getFecha_diagnostico());
+            pstm.setString(14, o.getObservacion());
+            pstm.setString(15, o.getUsuario());
            
 
-            pstm.setInt(15, o.getPaciente_id());
+            pstm.setInt(16, o.getPaciente_id());
 
             pstm.executeUpdate();
 
@@ -138,9 +139,9 @@ public class PacienteDao implements Intermetodos<Paciente> {
                     + " where paciente_id = ? ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
-
-            pstm.setInt(1, o.getPaciente_id());
-            pstm.setString(2, o.getUsuario());
+            
+            pstm.setString(1, o.getUsuario());
+            pstm.setInt(2, o.getPaciente_id());
             
             pstm.executeUpdate();
 

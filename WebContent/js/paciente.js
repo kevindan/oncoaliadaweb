@@ -30,7 +30,7 @@ function guardar_paciente(){
 	var codigo_ubigeoVar = $('#departamento_lista').val()+$('#provincia_lista').val()+$('#distrito_lista').val();
 	var fecha_diagnosticoVar = $('#fecha_diagnostico').val();
 	var observacionVar = $('#observacion').val();
-	var usuarioVar = $('#usuario').val();
+	var usuarioVar = $('#usuario_session').val();
 	
 	if(numero_documentoVar == ''){
 		
@@ -140,11 +140,13 @@ function eliminar_datos_paciente(paciente_id) {
 
 	var opcionVar = "eliminar";
 	var paciente_idVar = paciente_id;
+	var usuarioVar = $('#usuario_session').val();
 
 	$.post('PacienteController', {
 
 		opcion : opcionVar,
-		paciente_id : paciente_idVar
+		paciente_id : paciente_idVar,
+		usuario : usuarioVar
 
 	}, function(response) {
 		
@@ -169,15 +171,19 @@ function lista_pacientes(){
 	$.get('PacienteController', {
 		
 		opcion : opcionVar		
-		
-		
+				
 	},function(response){
 			
 			$('#listado_pacientes').empty();
 			
 			var body = "";
 			
+			var usuario = $('#usuario_session').val();
+			var tipo_usuario = $('#tipo_usuario').val();
+			
 			$.each(response, function(index, paciente){
+				
+				if(usuario == paciente.usuario || tipo_usuario == "Administrador" ){	
 				
 				body += `
 						<tr>					  
@@ -194,9 +200,27 @@ function lista_pacientes(){
 							</td>
 					    </tr>						
 				`;
-														
+				
+				}else{
+					
+					body += `
+						<tr>					  
+							<td class="text-center">${index+1}</td>
+							<td>${paciente.numero_documento}</td>
+							<td>${paciente.nombres}</td>
+							<td>${paciente.apellido_paterno}</td>
+							<td>${paciente.apellido_materno}</td>
+							<td>${paciente.fecha_nacimiento}</td>																	
+							<td class="text-center">
+								<button type="button" id="btn_ver_paciente" class="btn btn-primary"  onclick="ver_datos_paciente(${paciente.paciente_id})"><i class="glyphicon glyphicon-eye-open"></i></button>								
+							</td>
+					    </tr>						
+				`;
+					
+				}
+																	
 			});
-			
+						
 			$('#listado_pacientes').html(body);
 			$('#listado_pacientes_registrados').dataTable();
 			
@@ -253,6 +277,8 @@ function cargar_datos_paciente(paciente_id) {
 		
 		$('#fecha_diagnostico').val(response.fecha_diagnostico);
 		$('#observacion').val(response.observacion);
+		
+		console.log(response.paciente_id);
 		
 	});
 

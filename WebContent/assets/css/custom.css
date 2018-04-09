@@ -351,6 +351,16 @@ font-size: 12px;
 line-height: 1.428571429;
 }
 
+.current-user {
+	background-color : #777 !important;
+	color : white !important;
+}
+
+.current-user:hover {
+	background-color : #777 !important;
+	color : white !important;
+}
+
 /*==============================================
     MEDIA QUERIES     
     =============================================*/

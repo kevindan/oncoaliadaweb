@@ -223,6 +223,7 @@ public class PacienteController extends HttpServlet {
 			
 			paciente = new Paciente();
 			paciente.setPaciente_id(Integer.parseInt(request.getParameter("paciente_id")));
+			paciente.setUsuario(request.getParameter("usuario"));
 
 			try {
 				pacienteDao = new PacienteDao();				

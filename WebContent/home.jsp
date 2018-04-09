@@ -40,6 +40,7 @@
 		usuarioView.setUsuario(sesion.getAttribute("usuario").toString());
 		usuarioView.setNombrecompleto(sesion.getAttribute("nombrecompleto").toString());
 		usuarioView.setTipo_usuario(sesion.getAttribute("tipo_usuario").toString());
+		usuarioView.setId_tipo_usuario(Integer.parseInt(sesion.getAttribute("id_tipo_usuario").toString()));
 		
 	}else{
 		
@@ -48,7 +49,7 @@
 %>
 
 <input type="hidden" id="id_usuario" value="<%=usuarioView.getId_usuario()%>">
-<input type="hidden" id="usuario" value="<%=usuarioView.getUsuario()%>">
+<input type="hidden" id="usuario_session" value="<%=usuarioView.getUsuario()%>">
 <input type="hidden" id="tipo_usuario" value="<%=usuarioView.getTipo_usuario()%>"> 
 
     <div id="wrapper">
@@ -78,10 +79,16 @@
 					</li>
 					 <li>
                         <a class="active-menu"  href="home.jsp"><i class="fa fa-dashboard fa-3x" ></i> Inicio</a>
-                    </li>					
-                    <li id="menu_registro_usuarios">
-                        <a href="#" onclick="cargacontenido('nuevo_usuario.jsp')"><i class="fa fa-key fa-3x" ></i> Registro de usuarios</a>
-                    </li>
+                    </li>		
+                    <%
+                    	if (usuarioView.getId_tipo_usuario() == 1) {
+                    		%>
+                    			<li id="menu_registro_usuarios">
+			                        <a href="#" onclick="cargacontenido('nuevo_usuario.jsp')"><i class="fa fa-key fa-3x" ></i> Registro de usuarios</a>
+			                    </li>
+                    		<%	
+                    	}
+                    %>	
                      
                     <li  >
                         <a  href="#" onclick="cargacontenido('registro_paciente.jsp')"><i class="fa fa-user fa-3x"  ></i> Registro de paciente </a>
@@ -171,6 +178,17 @@
 				
 		});
 	</script>
-    
+    <script type="text/javascript">
+    	function validate(evt, regex) {
+	 	  var theEvent = evt || window.event;
+	 	  var key = theEvent.keyCode || theEvent.which;
+	 	  key = String.fromCharCode( key );
+	 	  
+	 	  if( !regex.test(key) ) {
+	 	    theEvent.returnValue = false;
+	 	    if(theEvent.preventDefault) theEvent.preventDefault();
+	 	  }
+    	}
+    </script>
    </body> 
 </html>

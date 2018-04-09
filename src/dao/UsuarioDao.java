@@ -188,8 +188,9 @@ public class UsuarioDao implements Intermetodos<Usuario> {
 			// conexion a la base de datos
 			cn = DataAccess.getConnection();
 			// comando sql
-			String sql = " select id_usuario, nombrecompleto, usuario, email from usuario "
-					+ " where activo = 1 order by id_usuario asc";
+			String sql = " select usuario.id_usuario, usuario.nombrecompleto, usuario.usuario, usuario.email, usuario.id_tipo_usuario, tipo_usuario.tipo_usuario from usuario inner join"
+					+ " tipo_usuario on tipo_usuario.tipo_usuario_id = usuario.id_tipo_usuario"
+					+ " where usuario.activo = 1 order by usuario.id_usuario asc";
 			// crear statement
 			Statement stm = cn.createStatement();
 			// ejecutar comando y obtener resultados
@@ -201,6 +202,7 @@ public class UsuarioDao implements Intermetodos<Usuario> {
 				usuario.setNombrecompleto(rs.getString("nombrecompleto"));
 				usuario.setUsuario(rs.getString("usuario"));
 				usuario.setEmail(rs.getString("email"));
+				usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
 				lista.add(usuario);
 			}
 			// cerrar cursor

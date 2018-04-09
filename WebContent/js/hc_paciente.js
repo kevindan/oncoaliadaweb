@@ -353,7 +353,12 @@ function lista_pacientes_hc(){
 			
 			var body = "";
 			
+			var usuario = $('#usuario').val();
+			var tipo_usuario = $('#tipo_usuario').val();
+			
 			$.each(response, function(index, paciente_hc){
+				
+				if(usuario == paciente_hc.usuario || tipo_usuario == "Administrador" ){
 				
 				body += `
 						<tr>					  
@@ -370,6 +375,24 @@ function lista_pacientes_hc(){
 							</td>
 					    </tr>						
 				`;
+				
+				}else{
+					
+					body += `
+						<tr>					  
+							<td class="text-center">${index+1}</td>
+							<td>${paciente_hc.numero_documento}</td>
+							<td>${paciente_hc.nombres}</td>
+							<td>${paciente_hc.apellido_paterno}</td>
+							<td>${paciente_hc.apellido_materno}</td>
+							<td>${paciente_hc.fecha_ultimo_control}</td>																	
+							<td class="text-center">
+								<button type="button" id="btn_ver_hc_paciente_${index+1}" class="btn btn-primary"  onclick="ver_datos_hc_paciente(${paciente_hc.hc_cabecera_id})"><i class="glyphicon glyphicon-eye-open"></i></button>								
+							</td>
+					    </tr>						
+				`;
+					
+				}
 														
 			});
 			

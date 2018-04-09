@@ -1,7 +1,6 @@
 $(document).ready(function(){
 			
 	$('#btnactualizar').hide();
-	$('#tb_usuario').dataTable();
 			
 });
 

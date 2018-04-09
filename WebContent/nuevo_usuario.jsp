@@ -84,55 +84,17 @@
 					</div>
 					<div class="panel panel-body">
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover" id="tb_usuario">
+							<table class="table table-striped table-bordered table-hover" id="listado_usuarios_registrados">
 								<thead>
 									<tr class="info">
 										<th class="text-center">N°</th>
 										<th>Nombre Completo</th>
-										<th>Usuario</th>										
+										<th>Usuario</th>	
+										<th>Tipo de usuario</th>									
 										<th class="text-center">Opciones</th>
 									</tr>
 								</thead>
-								<tbody>
-								<%
-									UsuarioDao usuarioDao = new UsuarioDao();
-									List<Usuario> usuarios = usuarioDao.Listar();
-									
-									int index = 0;
-									
-									for(Usuario usuario: usuarios){
-										
-										if(usuario.getNombrecompleto().equals("Administrador")){
-											
-								%>
-											<tr>
-												<td class="text-center"><%=index = index + 1%></td>
-												<td><%=usuario.getNombrecompleto()%></td>
-												<td><%=usuario.getUsuario()%></td>										
-												<td class="warning text-center">Usuario por defecto</td>
-											</tr>
-								<% 
-												
-											
-										}else{
-											
-										
-								%>
-									<tr>
-										<td class="text-center"><%=index = index + 1%></td>
-										<td><%=usuario.getNombrecompleto()%></td>
-										<td><%=usuario.getUsuario()%></td>										
-										<td class="text-center">									
-												<button class="btn btn-primary" onclick="ver_usuario('<%=usuario.getId_usuario()%>')" data-dismiss="modal" ><i class="glyphicon glyphicon-eye-open"></i></button>
-												<button class="btn btn-default" onclick="editar_usuario('<%=usuario.getId_usuario()%>')" data-dismiss="modal" ><i class="glyphicon glyphicon-edit"></i></button>											
-												<button  class="btn btn-danger" onclick="carga_usuario_eliminar('<%=usuario.getId_usuario()%>','<%=usuario.getUsuario()%>')" data-toggle="modal" data-target="#modal_confirma_eliminar"><i class="glyphicon glyphicon-remove"></i></button>									
-										</td>
-									</tr>
-								<% 
-										}
-									}
-								%>
-								</tbody>
+								<tbody id="listado_usuarios"></tbody>
 							</table>
 						</div>
 					</div>

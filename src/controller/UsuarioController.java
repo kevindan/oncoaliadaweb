@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import dao.PacienteDao;
 import dao.UsuarioDao;
+import entity.Paciente;
 import entity.Usuario;
 import entity.UsuarioView;
 
@@ -49,11 +52,28 @@ public class UsuarioController extends HttpServlet {
 			
 			request.getSession().removeAttribute("id_usuario");
 			request.getSession().removeAttribute("usuario");
+			request.getSession().removeAttribute("id_tipo_usuario");
 			request.getSession().removeAttribute("tipo_usuario");
 			request.getSession().removeAttribute("nombrecompleto");
 			request.getSession().invalidate();
 			response.sendRedirect("index.html");
 
+		} else if (opcion.equals("listar_usuarios")) {
+			try {
+
+				usuarioDao = new UsuarioDao();
+				
+				List<Usuario> usuarios = usuarioDao.Listar();
+
+				String json = new Gson().toJson(usuarios);
+
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
 		} else if (opcion.equals("buscar")) {
 
 			usu = new Usuario();
@@ -125,6 +145,7 @@ public class UsuarioController extends HttpServlet {
 					sesion.setAttribute("id_usuario", usuarioView.getId_usuario());
 					sesion.setAttribute("usuario", usuarioView.getUsuario());
 					sesion.setAttribute("nombrecompleto", usuarioView.getNombrecompleto());
+					sesion.setAttribute("id_tipo_usuario", usuarioView.getId_tipo_usuario());
 					sesion.setAttribute("tipo_usuario", usuarioView.getTipo_usuario());
 					response.sendRedirect("home.jsp");
 

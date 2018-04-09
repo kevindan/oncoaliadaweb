@@ -57,13 +57,13 @@
                                             <%
                                             	}
                                             %> 
-										</select>                                            
+										</select>                                           
 									</div>
 								</div>                                    	
                                 <div class="col-md-2">
                                 	<div class="form-group" id="div_numero_documento">
                                     	<label>N° de Documento:</label>
-                                        <input class="form-control" id="numero_documento" autofocus="autofocus"/>                                           
+                                        <input class="form-control" id="numero_documento" maxlength="8" onkeypress="validate(event, /[0-9]|\./)" autofocus="autofocus"/>                                           
                                     </div>
                                 </div>
 							</div>

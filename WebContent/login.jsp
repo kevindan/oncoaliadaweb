@@ -52,7 +52,7 @@
                                        <br />
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" class="form-control" placeholder="Nombre de usuario " name="txtUsuario" id="usuario" />
+                                            <input type="text" class="form-control" placeholder="Nombre de usuario " name="txtUsuario" id="usuario" autofocus="true" />
                                         </div>
                                          <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>

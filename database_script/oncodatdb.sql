@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `oncodatdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `oncodatdb`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: oncodatdb
+-- Host: localhost    Database: oncodatdb
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.21-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -324,9 +322,12 @@ CREATE TABLE `hc_cabecera` (
   `tratamiento_cuarta_enfermedad_progresiva` int(11) DEFAULT NULL,
   `tecnica_radioterapia_cuarta_enfermedad_progresiva` int(11) DEFAULT NULL,
   `dosis_radioterapia_cuarta_enfermedad_progresiva` decimal(18,2) DEFAULT NULL,
+  `usuario` varchar(100) DEFAULT NULL,
+  `fecha_registro` date DEFAULT NULL,
+  `fecha_ultima_modificacion` date DEFAULT NULL,
   `activo` bit(1) DEFAULT b'1',
   PRIMARY KEY (`hc_cabecera_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +336,7 @@ CREATE TABLE `hc_cabecera` (
 
 LOCK TABLES `hc_cabecera` WRITE;
 /*!40000 ALTER TABLE `hc_cabecera` DISABLE KEYS */;
-INSERT INTO `hc_cabecera` VALUES (1,2,'',5,'','01','','','',27.68,'',2,'','','Plomo','','','C00.3',0.00,0,'',NULL,1,1,0,0,0,'','','','','',0,0,'2018-02-15',NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,''),(2,0,'\0',0,'\0','','\0','\0','\0',0.00,'\0',0,'\0','\0','','\0','\0','',0.00,0,'',NULL,1,1,0,0,0,'','','','','',0,0,NULL,NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,'');
+INSERT INTO `hc_cabecera` VALUES (1,3,'',4,'','1','\0','','',29.06,'\0',0,'','','Plomo','\0','','C00.4',5.00,1,'Ninguna','2018-04-08',2,6,3,4,7,'TX','pT2','NX','MX','GX',2,0,NULL,'2018-04-08',5.30,1,'2018-04-08',5.30,'','',2,1,1,3.50,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,'2018-04-08',NULL,'');
 /*!40000 ALTER TABLE `hc_cabecera` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,7 +408,6 @@ CREATE TABLE `paciente` (
   `fecha_nacimiento` date NOT NULL,
   `direccion` varchar(200) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
-  `fecha_registro` date NOT NULL,
   `tipo_paciente` int(11) NOT NULL,
   `fallecido` bit(1) NOT NULL,
   `base_diagnostico_id` int(11) NOT NULL,
@@ -415,6 +415,9 @@ CREATE TABLE `paciente` (
   `codigo_ubigeo` varchar(8) DEFAULT NULL,
   `fecha_diagnostico` date DEFAULT NULL,
   `observacion` varchar(200) DEFAULT NULL,
+  `usuario` varchar(100) DEFAULT NULL,
+  `fecha_registro` date NOT NULL,
+  `fecha_ultima_modificacion` date DEFAULT NULL,
   `eliminado` bit(1) NOT NULL,
   PRIMARY KEY (`paciente_id`),
   KEY `fk_paciente_tipo_doc_idx` (`tipo_documento_id`),
@@ -423,7 +426,7 @@ CREATE TABLE `paciente` (
   CONSTRAINT `fk_paciente_base_diagnostico` FOREIGN KEY (`base_diagnostico_id`) REFERENCES `base_diagnostico` (`base_diagnostico_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_paciente_diagnostico` FOREIGN KEY (`codigo_cieo`) REFERENCES `diagnostico` (`codigo_cieo`),
   CONSTRAINT `fk_paciente_tipo_doc` FOREIGN KEY (`tipo_documento_id`) REFERENCES `tipo_documento` (`tipo_documento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,7 +435,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (1,1,'35345','gdfgdfg34','34dfgdfg','dfgdg44','1','2014-03-17','dfgdfg','4356456','2017-02-27',1,'\0',6,'C00.5','030204','2014-03-17','',''),(2,1,'47895478','Horacio Enrique','Pereyra','Chávez','1','1960-03-16','Jr. Calle los olmols 345, Jesús María','01854789','2017-02-27',1,'\0',5,'C61.X','190203','2015-03-06','Paciente muestra estado de salud estable y sin mayores molestias.','\0'),(3,1,'47958766','Hermógenes de Jesús','Flores','Tananta','','1964-03-16','Jr. Calle los Cedros Nro 345, San Isidro','014789658','2017-03-16',1,'\0',5,'D24.X','150101','2017-03-16','Paciente se encuenbtra estable.','\0'),(4,1,'24587456','Adriano Castor','Salaverry','Mendoza','1','1991-05-01','Calle los geranios Nro 235, lince','4568798','2017-03-24',1,'\0',5,'C08.0','150101','2017-01-03','Paciente luce con buen semblante.',''),(5,1,'6554879875','Nesto Anibal','Piltrafa','Venancio','1','1946-03-04','Los Cedros 456, Chorrillos','32569874','2017-03-24',1,'\0',1,'C61.X','150101','2013-02-09','Paciente recibió una (01) radioterapia y dos (02) quimioterapias.','\0'),(6,1,'78401254','Marcos Hermenegildo','Saavedra','Navarro','1','1952-05-04','Dirección de prueba.','25689874','2017-03-27',1,'\0',1,'C61.X','070101','2017-03-03','Paciente mantiene un estilo de vida saludable. En observación','\0'),(7,1,'45875698','Grimaldo César','Estupinador','Galván','1','1951-06-30','Calle los manzanos Nro 345, San Martín de Porres, Lima ','456987452','2017-03-30',1,'\0',1,'C61.X','150101','2017-03-30','Paciente conserva estado de salud general.','\0'),(8,1,'78964512','Remigio Gonzalo','Vilchez','Ordoñez','1','1950-03-23','Sin dirección especificada.','987456321','2017-03-30',1,'\0',1,'C61.X','150101','2017-03-30','Paciente presenta incontinencia urinaria leve. Buen estado de salud general.','\0'),(9,1,'547896','Hemilio Fernando','Valles','Barrera','1','1960-03-30','Av. 28 de Julio 567, Miraflores','999874589','2017-03-30',1,'\0',1,'C61.X','150122','2017-03-30','Paciente presenta respuesta positiva al tratamiento IMRT.','\0'),(10,1,'789654125','Teófilo Vernis','Luna','Quevedo','1','1930-03-30','Los álamos, 345 San Juan de lurigancho','96587456','2017-03-30',1,'\0',1,'C61.X','150101','2017-03-30','Paciente muestra un estado de salud favorable','\0'),(11,1,'456878','Helmout Brian','Oconor','Vulkmarven','1','1950-03-30','Calle de las pizzas, 456, Miraflores','987456987','2017-03-30',1,'\0',1,'C61.X','150101','2017-03-30','Paciente con PSA de 8 ng/ml. Se recomienda examenes auxiliares.',''),(12,1,'58745893','Dominic Estefano','Rumaldo','Perez','1','1987-03-30','Calle los pinos 567, Urb. Pilas, Los olivos.','698745896','2017-03-30',1,'\0',1,'C61.X','150117','2017-03-30','Paciente con gleason de 6, celulas claramente diferenciadas',''),(13,1,'48486552','Augusto Hernan','Shubel','Lennin','1','1960-06-01','Jr. Cahuide 256, Villa el Salvador','254879652','2017-07-31',1,'\0',1,'C67.2','150504','2017-07-05','Paciente estable.','\0'),(14,1,'78547896','Paciente de prueba','Prueba','Prueba','1','2017-09-13','prueba','785444999','2017-09-15',1,'\0',1,'C61.X','130808','2017-09-13','prueba',''),(15,1,'44646456','yuiyui','yuiyi','yuiyui','1','2017-09-06','yuiyuiyui','456456','2017-09-15',1,'\0',1,'C61.X','060702','2017-09-13','ujuyiyui',''),(16,3,'5656445','ffhjghj','ghjghj','ghjghj','1','2017-09-13','hjkhjk','45464566','2017-09-15',1,'\0',2,'C67.2','040105','2017-09-06','jyyuiyui',''),(17,2,'47895478','nmkhjkhjk','hjkhjk','hjkh','1','2017-09-21','hjkhjk','hjkhjk','2017-09-15',1,'\0',1,'C67.3','030401','2017-09-13','hjkljkl',''),(18,1,'7869786','kjkhjkhjkh','hjkhjk','hjkhjk','1','2017-09-20','hjkhjk','5566','2017-09-15',1,'\0',1,'C00.1','030301','2017-09-05','kljkljkljkl',''),(19,1,'785478966','fdg','dfgd','dfgd','1','2017-09-13','dfgdfg','456456','2017-09-15',1,'\0',1,'C00.1','040403','2017-09-20','ghjghj',''),(20,1,'56564456','fdgdfg','dfgd','dfgdf','1','2017-09-14','dfgdfg','5656','2017-09-15',1,'\0',1,'C00.1','030302','2017-09-13','ghjghjghj',''),(21,1,'48745896','ghjgj','ghj','ghj','1','2017-08-10','ghjghj','56+56+','2017-09-15',1,'\0',1,'C00.2','030205','2017-09-12','hfghfghf',''),(22,1,'45689566','Paciente de prueba 2','apellido de prueba 2','apellido de prueba 2','1','2017-09-06','dirección de prueba','985999999','2017-09-15',1,'\0',1,'C61.X','090304','2017-09-08','observacion  de prueba',''),(23,1,'78946121','ghjgj','ghjgh','ghj','1','2017-09-20','ghjghj','ghjghj','2017-09-15',2,'\0',2,'C00.3','130204','2017-09-06','ghjghjghj',''),(24,1,'Jfhdhfhd','Jfjdhdhd','Dhdu','Ud ufudiduji','1','2017-09-01','','4566776','2017-09-15',1,'\0',5,'C61.X','050405','2017-09-23','Ghjjhgg',''),(25,1,'45462746','Roberto Huberto','Humbgolt','Estrada','1','1949-08-31','Calle Los Sauces Nro 233','999999999','2017-09-17',1,'\0',1,'C00.0','150101','2017-09-07','Ninguna.','\0'),(26,1,'70858396','Miguel Alberto','Saldarriaga','Villavicencio','1','1947-04-14','Avenida La Molina, La Molina, Molina','987654321','2017-09-20',2,'\0',1,'C61.X','200101','2017-09-05','','\0'),(27,1,'00000000','Prueba','Prueba','Prueba','1','2017-12-15','Prueba','Prueba','2017-12-12',1,'\0',1,'C00.3','010101','2017-12-01','Prueba',''),(28,1,'00000000','Prueba','Prueba','Prueba','1','2017-12-14','Prueba','Prueba','2017-12-12',1,'\0',1,'C00.4','010101','2017-12-14','Prueba',''),(29,1,'00000001','prueba','prueba','prueba','1','2017-12-13','prueba','prueba','2017-12-12',2,'\0',5,'C00.5','080101','2017-12-05','prueba',''),(30,1,'02222222','hjhjh','hjhj','hjhj','1','2017-12-28','hjhj','hjhj','2017-12-12',1,'\0',1,'C00.5','010101','2017-12-14','hjhj','');
+INSERT INTO `paciente` VALUES (1,1,'6767','fgfgf','fgfgf','fgfg','1','2018-04-02','fgfgfg','5656',1,'\0',1,'C00.0','040601','2018-04-11','',NULL,'2018-04-08','2018-04-08',''),(2,1,'01234567','Kevin Daniel','Pinchi','García','1','1991-08-25','Jr. Castrovirreyna 225 - Breña','975683285',1,'\0',1,'C07.X','150105','2018-04-11','','admin','2018-04-08','2018-04-08','\0'),(3,1,'12345678','Masurash','Shimpo','Tayuji','1','2018-04-08','Lima','0',1,'\0',1,'C00.5','150101','2018-04-08','Ninguna','bretts','2018-04-08','2018-04-08','');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -794,7 +797,7 @@ CREATE TABLE `usuario` (
   `id_tipo_usuario` int(11) DEFAULT NULL,
   `activo` bit(1) DEFAULT b'1',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -803,17 +806,9 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Administrador','admin','admin@mail.com','admin',1,''),(2,'Ruth Milagros Huaringa Leiva','rmhuaringa','rmhuaringa@gmail.com','rmhuaringa123456',1,''),(3,'usuarioprueba','usuarioprueba','usuarioprueba@mail.com','usuarioprueba',2,'');
+INSERT INTO `usuario` VALUES (1,'Administrador','admin','admin@mail.com','admin',1,''),(2,'Ruth Milagros Huaringa Leiva','rmhuaringa','rmhuaringa@gmail.com','rmhuaringa123456',1,'\0'),(3,'Bretts Acuña','brettsacuna','brettsacuna@mail.com','brettsacuna$',2,'\0'),(4,'Usuario de prueba','usuario','usuario@gmail.com','admin123456',1,'\0'),(5,'Carlos Caballero','carlitos','carlosmecalux@gmail.com','carlitos',2,''),(6,'Bretts','bretts','brettsacuna@gmail.com','admin',1,'\0'),(7,'Bretts Acuña','brettsacuna','brettsacuna@gmail.com','brettsacuna',1,'');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'oncodatdb'
---
-
---
--- Dumping routines for database 'oncodatdb'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -824,4 +819,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-05 18:32:22
+-- Dump completed on 2018-04-08 23:41:56

@@ -251,7 +251,7 @@ function elimina_usuario(id_usuario){
 			
 			if(response == 1){
 				
-				$('#tabla_usuarios').load('nuevo_usuario.jsp #tabla_usuarios');
+				listar_usuarios();
 				
 			}else if(response == 0){
 				alert('Error');
@@ -260,3 +260,58 @@ function elimina_usuario(id_usuario){
 		});
 			
 }
+
+function listar_usuarios() {
+	var opcionVar = "listar_usuarios";
+	
+	$.get('UsuarioController', {
+		
+		opcion : opcionVar		
+				
+	},function(response){
+		var usuario_nombre = $('#usuario_session').val();
+		
+		$('#listado_usuarios').empty();
+		
+		var body = "";
+		
+		$.each(response, function(index, usuario){
+			if(usuario.nombrecompleto != "Administrador" ){	
+				if (usuario_nombre == usuario.usuario) {
+					body += `
+							<tr class="current-user">
+								<td class="text-center">${index + 1}</td>
+								<td>${usuario.nombrecompleto}</td>
+								<td>${usuario.usuario}</td>		
+								<td class="text-center"><b>${usuario.id_tipo_usuario == 1 ? "Administrador" : "Usuario"}</b></td>										
+								<td class="text-center">
+										<button class="btn btn-default" onclick="editar_usuario('${usuario.id_usuario}')" data-dismiss="modal" ><i class="glyphicon glyphicon-edit"></i></button>								
+								</td>
+							</tr>					
+					`;
+				} else {
+					body += `
+							<tr>
+								<td class="text-center">${index + 1}</td>
+								<td>${usuario.nombrecompleto}</td>
+								<td>${usuario.usuario}</td>	
+								<td class="text-center"><b>${usuario.id_tipo_usuario == 1 ? "Administrador" : "Usuario"}</b></td>													
+								<td class="text-center">									
+										<button class="btn btn-primary" onclick="ver_usuario('${usuario.id_usuario}')" data-dismiss="modal" ><i class="glyphicon glyphicon-eye-open"></i></button>
+										<button class="btn btn-default" onclick="editar_usuario('${usuario.id_usuario}')" data-dismiss="modal" ><i class="glyphicon glyphicon-edit"></i></button>											
+										<button  class="btn btn-danger" onclick="carga_usuario_eliminar('${usuario.id_usuario}','${usuario.usuario}')" data-toggle="modal" data-target="#modal_confirma_eliminar"><i class="glyphicon glyphicon-remove"></i></button>									
+								</td>
+							</tr>					
+					`;
+				}
+			}													
+		});
+					
+		$('#listado_usuarios').html(body);
+		$('#listado_usuarios_registrados').dataTable();
+			
+						
+	});
+}
+
+listar_usuarios();
