@@ -29,7 +29,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+ " antecedente_obesidad,imc, antecedente_exposicion_trabajo, antecedente_exposicion_trabajo_detalle,"
 					+ " antecedente_its, antecedente_sustancia, sustancia_descripcion, antecedente_prostatitis, antecedente_neoplasia, antecedente_neoplasia_cieo, "
 					+ " psa_debut, histologia_id, histologia_especificacion, fecha_diagnostico_histologico, tipo_diagnostico_id, grupo_riesgo_id, gleason_mayor, "
-					+ " gleason_menor, gleason_total, categoria_t, categoria_t_patologico, categoria_n, categoria_m, categoria_g, tratamiento_inicial, eco_paciente, "
+					+ " gleason_menor, gleason_total, categoria_t, categoria_t_patologico, categoria_n, categoria_m, categoria_n_patologico,categoria_m_patologico,estadio,tratamiento_inicial,tratamiento_inicial_otros ,eco_paciente, "
 					+ " fecha_ultimo_control, fecha_falla_bioquimica, psa_falla_bioquimica, tratamiento_falla_bioquimica, fecha_enfermedad_metastasica, "
 					+ " psa_enfermedad_metastasica, sintomatico_enfermedad_metastasica, enfermedad_metastasica_oligometastasico, organo_enfermedad_metastasica, "
 					+ " tratamiento_enfermedad_metastasica, tecnica_radioterapia_enfermedad_metastasica, dosis_radioterapia_enfermedad_metastasica, "
@@ -42,7 +42,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+ " sintomatico_cuarta_enfermedad_progresiva, cuarta_enfermedad_progresiva_oligometastasico, organo_cuarta_enfermedad_progresiva, "
 					+ " tratamiento_cuarta_enfermedad_progresiva, tecnica_radioterapia_cuarta_enfermedad_progresiva, dosis_radioterapia_cuarta_enfermedad_progresiva, "
 					+ " usuario,fecha_registro)  "
-					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate()) ";
+					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate()) ";
 
 			PreparedStatement pstm = cn.prepareStatement(sql);
 
@@ -76,47 +76,50 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			pstm.setString(28, o.getCategoria_t_patologico());
 			pstm.setString(29, o.getCategoria_n());
 			pstm.setString(30, o.getCategoria_m());
-			pstm.setString(31, o.getCategoria_g());
-			pstm.setInt(32, o.getTratamiento_inicial());
-			pstm.setInt(33, o.getEco_paciente());
-			pstm.setString(34, o.getFecha_ultimo_control());
-			pstm.setString(35, o.getFecha_falla_bioquimica());
-			pstm.setDouble(36, o.getPsa_falla_bioquimica());
-			pstm.setInt(37, o.getTratamiento_falla_bioquimica());
-			pstm.setString(38, o.getFecha_enfermedad_metastasica());
-			pstm.setDouble(39, o.getPsa_enfermedad_metastasica());
-			pstm.setInt(40, o.getSintomatico_enfermedad_metastasica());
-			pstm.setInt(41, o.getEnfermedad_metastasica_oligometastasico());
-			pstm.setInt(42, o.getOrgano_enfermedad_metastasica());
-			pstm.setInt(43, o.getTratamiento_enfermedad_metastasica());
-			pstm.setInt(44, o.getTecnica_radioterapia_enfermedad_metastasica());
-			pstm.setDouble(45, o.getDosis_radioterapia_enfermedad_metastasica());
-			pstm.setString(46, o.getFecha_segunda_enfermedad_progresiva());
-			pstm.setDouble(47, o.getPsa_segunda_enfermedad_progresiva());
-			pstm.setInt(48, o.getSintomatico_segunda_enfermedad_progresiva());
-			pstm.setInt(49, o.getSegunda_enfermedad_progresiva_oligometastasico());
-			pstm.setInt(50, o.getOrgano_segunda_enfermedad_progresiva());
-			pstm.setInt(51, o.getTratamiento_segunda_enfermedad_progresiva());
-			pstm.setInt(52, o.getTecnica_radioterapia_segunda_enfermedad_progresiva());
-			pstm.setDouble(53, o.getDosis_radioterapia_segunda_enfermedad_progresiva());
-			pstm.setString(54, o.getFecha_tercera_enfermedad_progresiva());
-			pstm.setDouble(55, o.getPsa_tercera_enfermedad_progresiva());
-			pstm.setInt(56, o.getSintomatico_tercera_enfermedad_progresiva());
-			pstm.setInt(57, o.getTercera_enfermedad_progresiva_oligometastasico());
-			pstm.setInt(58, o.getOrgano_tercera_enfermedad_progresiva());
-			pstm.setInt(59, o.getTratamiento_tercera_enfermedad_progresiva());
-			pstm.setInt(60, o.getTecnica_radioterapia_tercera_enfermedad_progresiva());
-			pstm.setDouble(61, o.getDosis_radioterapia_tercera_enfermedad_progresiva());
-			pstm.setString(62, o.getFecha_cuarta_enfermedad_progresiva());
-			pstm.setDouble(63, o.getPsa_cuarta_enfermedad_progresiva());
-			pstm.setInt(64, o.getSintomatico_cuarta_enfermedad_progresiva());
-			pstm.setInt(65, o.getCuarta_enfermedad_progresiva_oligometastasico());
-			pstm.setInt(66, o.getOrgano_cuarta_enfermedad_progresiva());
-			pstm.setInt(67, o.getTratamiento_cuarta_enfermedad_progresiva());
-			pstm.setInt(68, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
-			pstm.setDouble(69, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
+			pstm.setString(31, o.getCategoria_n_patologico());
+			pstm.setString(32, o.getCategoria_m_patologico());
+			pstm.setString(33, o.getEstadio());
+			pstm.setInt(34, o.getTratamiento_inicial());
+			pstm.setString(35, o.getTratamiento_inicial_otros());			
+			pstm.setInt(36, o.getEco_paciente());
+			pstm.setString(37, o.getFecha_ultimo_control());
+			pstm.setString(38, o.getFecha_falla_bioquimica());
+			pstm.setDouble(39, o.getPsa_falla_bioquimica());
+			pstm.setInt(40, o.getTratamiento_falla_bioquimica());
+			pstm.setString(41, o.getFecha_enfermedad_metastasica());
+			pstm.setDouble(42, o.getPsa_enfermedad_metastasica());
+			pstm.setInt(43, o.getSintomatico_enfermedad_metastasica());
+			pstm.setInt(44, o.getEnfermedad_metastasica_oligometastasico());
+			pstm.setInt(45, o.getOrgano_enfermedad_metastasica());
+			pstm.setInt(46, o.getTratamiento_enfermedad_metastasica());
+			pstm.setInt(47, o.getTecnica_radioterapia_enfermedad_metastasica());
+			pstm.setDouble(48, o.getDosis_radioterapia_enfermedad_metastasica());
+			pstm.setString(49, o.getFecha_segunda_enfermedad_progresiva());
+			pstm.setDouble(50, o.getPsa_segunda_enfermedad_progresiva());
+			pstm.setInt(51, o.getSintomatico_segunda_enfermedad_progresiva());
+			pstm.setInt(52, o.getSegunda_enfermedad_progresiva_oligometastasico());
+			pstm.setInt(53, o.getOrgano_segunda_enfermedad_progresiva());
+			pstm.setInt(54, o.getTratamiento_segunda_enfermedad_progresiva());
+			pstm.setInt(55, o.getTecnica_radioterapia_segunda_enfermedad_progresiva());
+			pstm.setDouble(56, o.getDosis_radioterapia_segunda_enfermedad_progresiva());
+			pstm.setString(57, o.getFecha_tercera_enfermedad_progresiva());
+			pstm.setDouble(58, o.getPsa_tercera_enfermedad_progresiva());
+			pstm.setInt(59, o.getSintomatico_tercera_enfermedad_progresiva());
+			pstm.setInt(60, o.getTercera_enfermedad_progresiva_oligometastasico());
+			pstm.setInt(61, o.getOrgano_tercera_enfermedad_progresiva());
+			pstm.setInt(62, o.getTratamiento_tercera_enfermedad_progresiva());
+			pstm.setInt(63, o.getTecnica_radioterapia_tercera_enfermedad_progresiva());
+			pstm.setDouble(64, o.getDosis_radioterapia_tercera_enfermedad_progresiva());
+			pstm.setString(65, o.getFecha_cuarta_enfermedad_progresiva());
+			pstm.setDouble(66, o.getPsa_cuarta_enfermedad_progresiva());
+			pstm.setInt(67, o.getSintomatico_cuarta_enfermedad_progresiva());
+			pstm.setInt(68, o.getCuarta_enfermedad_progresiva_oligometastasico());
+			pstm.setInt(69, o.getOrgano_cuarta_enfermedad_progresiva());
+			pstm.setInt(70, o.getTratamiento_cuarta_enfermedad_progresiva());
+			pstm.setInt(71, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
+			pstm.setDouble(72, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
 			
-			pstm.setString(70, o.getUsuario());
+			pstm.setString(73, o.getUsuario());
 
 			pstm.executeUpdate();
 
@@ -182,8 +185,11 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+"categoria_t_patologico = ?,"
 					+"categoria_n = ?, "
 					+"categoria_m = ?, "
-					+"categoria_g = ?, "
+					+"categoria_n_patologico = ?, "
+					+"categoria_m_patologico = ?, "
+					+"estadio = ?,"
 					+"tratamiento_inicial = ?, "
+					+"tratamiento_inicial_otros = ?,"
 					+"eco_paciente = ?, "
 					+"fecha_ultimo_control = ?, "
 					+"fecha_falla_bioquimica = ?,"
@@ -257,48 +263,51 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 			pstm.setString(27, o.getCategoria_t_patologico());
 			pstm.setString(28, o.getCategoria_n());
 			pstm.setString(29, o.getCategoria_m());
-			pstm.setString(30, o.getCategoria_g());
-			pstm.setInt(31, o.getTratamiento_inicial());
-			pstm.setInt(32, o.getEco_paciente());
-			pstm.setString(33, o.getFecha_ultimo_control());
-			pstm.setString(34, o.getFecha_falla_bioquimica());
-			pstm.setDouble(35, o.getPsa_falla_bioquimica());
-			pstm.setInt(36, o.getTratamiento_falla_bioquimica());
-			pstm.setString(37, o.getFecha_enfermedad_metastasica());
-			pstm.setDouble(38, o.getPsa_enfermedad_metastasica());
-			pstm.setInt(39, o.getSintomatico_enfermedad_metastasica());
-			pstm.setInt(40, o.getEnfermedad_metastasica_oligometastasico());
-			pstm.setInt(41, o.getOrgano_enfermedad_metastasica());
-			pstm.setInt(42, o.getTratamiento_enfermedad_metastasica());
-			pstm.setInt(43, o.getTecnica_radioterapia_enfermedad_metastasica());
-			pstm.setDouble(44, o.getDosis_radioterapia_enfermedad_metastasica());
-			pstm.setString(45, o.getFecha_segunda_enfermedad_progresiva());
-			pstm.setDouble(46, o.getPsa_segunda_enfermedad_progresiva());
-			pstm.setInt(47, o.getSintomatico_segunda_enfermedad_progresiva());
-			pstm.setInt(48, o.getSegunda_enfermedad_progresiva_oligometastasico());
-			pstm.setInt(49, o.getOrgano_segunda_enfermedad_progresiva());
-			pstm.setInt(50, o.getTratamiento_segunda_enfermedad_progresiva());
-			pstm.setInt(51, o.getTecnica_radioterapia_segunda_enfermedad_progresiva());
-			pstm.setDouble(52, o.getDosis_radioterapia_segunda_enfermedad_progresiva());
-			pstm.setString(53, o.getFecha_tercera_enfermedad_progresiva());
-			pstm.setDouble(54, o.getPsa_tercera_enfermedad_progresiva());
-			pstm.setInt(55, o.getSintomatico_tercera_enfermedad_progresiva());
-			pstm.setInt(56, o.getTercera_enfermedad_progresiva_oligometastasico());
-			pstm.setInt(57, o.getOrgano_tercera_enfermedad_progresiva());
-			pstm.setInt(58, o.getTratamiento_tercera_enfermedad_progresiva());
-			pstm.setInt(59, o.getTecnica_radioterapia_tercera_enfermedad_progresiva());
-			pstm.setDouble(60, o.getDosis_radioterapia_tercera_enfermedad_progresiva());
-			pstm.setString(61, o.getFecha_cuarta_enfermedad_progresiva());
-			pstm.setDouble(62, o.getPsa_cuarta_enfermedad_progresiva());
-			pstm.setInt(63, o.getSintomatico_cuarta_enfermedad_progresiva());
-			pstm.setInt(64, o.getCuarta_enfermedad_progresiva_oligometastasico());
-			pstm.setInt(65, o.getOrgano_cuarta_enfermedad_progresiva());
-			pstm.setInt(66, o.getTratamiento_cuarta_enfermedad_progresiva());
-			pstm.setInt(67, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
-			pstm.setDouble(68, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
-			pstm.setString(69, o.getUsuario());
+			pstm.setString(30, o.getCategoria_n_patologico());
+			pstm.setString(31, o.getCategoria_m_patologico());
+			pstm.setString(32, o.getEstadio());
+			pstm.setInt(33, o.getTratamiento_inicial());
+			pstm.setString(34, o.getTratamiento_inicial_otros());
+			pstm.setInt(35, o.getEco_paciente());
+			pstm.setString(36, o.getFecha_ultimo_control());
+			pstm.setString(37, o.getFecha_falla_bioquimica());
+			pstm.setDouble(38, o.getPsa_falla_bioquimica());
+			pstm.setInt(39, o.getTratamiento_falla_bioquimica());
+			pstm.setString(40, o.getFecha_enfermedad_metastasica());
+			pstm.setDouble(41, o.getPsa_enfermedad_metastasica());
+			pstm.setInt(42, o.getSintomatico_enfermedad_metastasica());
+			pstm.setInt(43, o.getEnfermedad_metastasica_oligometastasico());
+			pstm.setInt(44, o.getOrgano_enfermedad_metastasica());
+			pstm.setInt(45, o.getTratamiento_enfermedad_metastasica());
+			pstm.setInt(46, o.getTecnica_radioterapia_enfermedad_metastasica());
+			pstm.setDouble(47, o.getDosis_radioterapia_enfermedad_metastasica());
+			pstm.setString(48, o.getFecha_segunda_enfermedad_progresiva());
+			pstm.setDouble(49, o.getPsa_segunda_enfermedad_progresiva());
+			pstm.setInt(50, o.getSintomatico_segunda_enfermedad_progresiva());
+			pstm.setInt(51, o.getSegunda_enfermedad_progresiva_oligometastasico());
+			pstm.setInt(52, o.getOrgano_segunda_enfermedad_progresiva());
+			pstm.setInt(53, o.getTratamiento_segunda_enfermedad_progresiva());
+			pstm.setInt(54, o.getTecnica_radioterapia_segunda_enfermedad_progresiva());
+			pstm.setDouble(55, o.getDosis_radioterapia_segunda_enfermedad_progresiva());
+			pstm.setString(56, o.getFecha_tercera_enfermedad_progresiva());
+			pstm.setDouble(57, o.getPsa_tercera_enfermedad_progresiva());
+			pstm.setInt(58, o.getSintomatico_tercera_enfermedad_progresiva());
+			pstm.setInt(59, o.getTercera_enfermedad_progresiva_oligometastasico());
+			pstm.setInt(60, o.getOrgano_tercera_enfermedad_progresiva());
+			pstm.setInt(61, o.getTratamiento_tercera_enfermedad_progresiva());
+			pstm.setInt(62, o.getTecnica_radioterapia_tercera_enfermedad_progresiva());
+			pstm.setDouble(63, o.getDosis_radioterapia_tercera_enfermedad_progresiva());
+			pstm.setString(64, o.getFecha_cuarta_enfermedad_progresiva());
+			pstm.setDouble(65, o.getPsa_cuarta_enfermedad_progresiva());
+			pstm.setInt(66, o.getSintomatico_cuarta_enfermedad_progresiva());
+			pstm.setInt(67, o.getCuarta_enfermedad_progresiva_oligometastasico());
+			pstm.setInt(68, o.getOrgano_cuarta_enfermedad_progresiva());
+			pstm.setInt(69, o.getTratamiento_cuarta_enfermedad_progresiva());
+			pstm.setInt(70, o.getTecnica_radioterapia_cuarta_enfermedad_progresiva());
+			pstm.setDouble(71, o.getDosis_radioterapia_cuarta_enfermedad_progresiva());
+			pstm.setString(72, o.getUsuario());
 						
-			pstm.setInt(70, o.getHc_cabecera_id());
+			pstm.setInt(73, o.getHc_cabecera_id());
 			
 			pstm.executeUpdate();
 
@@ -464,8 +473,11 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 						+"categoria_t_patologico, "
 						+"categoria_n, "
 						+"categoria_m, "
-						+"categoria_g, "
+						+"categoria_n_patologico, "
+						+"categoria_m_patologico, "
+						+"estadio, "
 						+"tratamiento_inicial, "
+						+"tratamiento_inicial_otros, "
 						+"eco_paciente, "
 						+"date_format(fecha_ultimo_control, '%m/%d/%Y') as  fecha_ultimo_control, "
 						+"date_format(fecha_falla_bioquimica, '%m/%d/%Y') as fecha_falla_bioquimica, "
@@ -504,6 +516,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 						+"tecnica_radioterapia_cuarta_enfermedad_progresiva, "
 						+"dosis_radioterapia_cuarta_enfermedad_progresiva  from "
 						+ " hc_cabecera where hc_cabecera_id = ? and activo = 1";
+            
  
             PreparedStatement pstm = cn.prepareStatement(sql);
             
@@ -544,8 +557,11 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
                 hc.setCategoria_t_patologico(rs.getString("categoria_t_patologico")); 
                 hc.setCategoria_n(rs.getString("categoria_n")); 
                 hc.setCategoria_m(rs.getString("categoria_m")); 
-                hc.setCategoria_g(rs.getString("categoria_g")); 
+                hc.setCategoria_n_patologico(rs.getString("categoria_n_patologico"));
+                hc.setCategoria_m_patologico(rs.getString("categoria_m_patologico"));
+                hc.setEstadio(rs.getString("estadio"));
                 hc.setTratamiento_inicial(rs.getInt("tratamiento_inicial")); 
+                hc.setTratamiento_inicial_otros(rs.getString("tratamiento_inicial_otros")); 
                 hc.setEco_paciente(rs.getInt("eco_paciente")); 
                 hc.setFecha_ultimo_control(rs.getString("fecha_ultimo_control")); 
                 hc.setFecha_falla_bioquimica(rs.getString("fecha_falla_bioquimica")); 

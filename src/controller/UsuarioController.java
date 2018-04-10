@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import dao.PacienteDao;
 import dao.UsuarioDao;
-import entity.Paciente;
 import entity.Usuario;
 import entity.UsuarioView;
 

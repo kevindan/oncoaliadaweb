@@ -184,12 +184,15 @@ public class Hc_cabeceraController extends HttpServlet {
 			hc_cabecera.setCategoria_t_patologico(request.getParameter("categoria_t_patologico"));
 			hc_cabecera.setCategoria_n(request.getParameter("categoria_n"));
 			hc_cabecera.setCategoria_m(request.getParameter("categoria_m"));
-			hc_cabecera.setCategoria_g(request.getParameter("categoria_g"));
+			hc_cabecera.setCategoria_n_patologico(request.getParameter("categoria_n_patologico"));
+			hc_cabecera.setCategoria_m_patologico(request.getParameter("categoria_m_patologico"));
 			
 			if (!(request.getParameter("tratamiento_inicial").equals(""))) {
 
 				hc_cabecera.setTratamiento_inicial(Integer.parseInt(request.getParameter("tratamiento_inicial")));
 			}
+			
+			hc_cabecera.setTratamiento_inicial_otros(request.getParameter("tratamiento_inicial_otros"));
 			
 			if (!(request.getParameter("eco_paciente").equals(""))) {
 

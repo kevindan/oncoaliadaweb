@@ -118,13 +118,13 @@
 								<div class="row">
 									<div class="col-md-2">
 										<div class="form-group">
-											<label>E.C.O:</label> 
+											<label>ECOG:</label> 
 											<select  class="form-control" id="eco_paciente">
-												<option value="0">ECO-0</option>
-												<option value="1">ECO-1</option>
-												<option value="2">ECO-2</option>
-												<option value="3">ECO-3</option>
-												<option value="4">ECO-4</option>
+												<option value="0">ECOG-0</option>
+												<option value="1">ECOG-1</option>
+												<option value="2">ECOG-2</option>
+												<option value="3">ECOG-3</option>
+												<option value="4">ECOG-4</option>
 											</select>
 										</div>
 									</div>
@@ -139,7 +139,7 @@
 										<div class="panel with-nav-tabs panel-primary">
 											<div class="panel-heading">
 												<ul class="nav nav-tabs">
-													<li class="active"><a href="#tab_antecedentes" data-toggle="tab">Antecedentes</a></li>
+													<li class="active"><a href="#tab_antecedentes" data-toggle="tab">Factores de Riesgo</a></li>
 													<li><a href="#tab_datos_tumor" data-toggle="tab">Datos tumor</a></li>
 													<li><a href="#tab_diagnostico" data-toggle="tab">Diagnostico</a></li>
 													<li><a href="#tab_seguimiento" data-toggle="tab">Seguimiento</a></li>
@@ -326,16 +326,16 @@
 																	</div>																														
 																</div>
 															</div>
-															<div class="col-md-8">	
+															<div class="col-md-4">	
 																<div class="panel panel-info">
 																	<div class="panel-heading">
-																		Estadiaje (TNM)
+																		Estadío Clinico
 																	</div>
 																	<div class="panel-body">
 																		<div class="row">
-																			<div class="col-md-2">
+																			<div class="col-md-4">
 																				<div class="form-group">
-																					<label>Cat T:</label>
+																					<label>T:</label>
 																					<select class="form-control" id="categoria_t">
 																						<option value=""></option>
 																						<option value="TX">TX</option>
@@ -354,10 +354,43 @@
 																						<option value="T4">T4</option>																						
 																					</select>
 																				</div>
-																			</div>
-																			<div class="col-md-2">
+																			</div>																																					
+																			<div class="col-md-4">
 																				<div class="form-group">
-																					<label>T Pat:</label>
+																					<label>N:</label>
+																					<select class="form-control" id="categoria_n">
+																						<option value=""></option>
+																						<option value="NX">NX</option>
+																						<option value="N0">N0</option>
+																						<option value="N1">N1</option>
+																					</select>
+																				</div>
+																			</div>
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label>M:</label>
+																					<select class="form-control" id="categoria_m">
+																						<option value=""></option>
+																						<option value="MX">MX</option>
+																						<option value="M0">M0</option>
+																						<option value="M1">M1</option>
+																					</select>
+																				</div>
+																			</div>																																				
+																		</div>
+																	</div>																														
+																</div>																
+															</div>
+															<div class="col-md-4">
+																<div class="panel panel-info">
+																	<div class="panel-heading">
+																		Estadío Patológico
+																	</div>
+																	<div class="panel-body">
+																		<div class="row">
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label>T:</label>
 																					<select class="form-control" id="categoria_t_patologico">
 																						<option value=""></option>
 																						<option value="pT2">pT2</option>
@@ -369,11 +402,11 @@
 																						<option value="pT3b">pT3b</option>
 																						<option value="pT4">pT4</option>																																											</select>
 																				</div>
-																			</div>																			
-																			<div class="col-md-2">
+																			</div>																																						
+																			<div class="col-md-4">
 																				<div class="form-group">
-																					<label>Cat. N:</label>
-																					<select class="form-control" id="categoria_n">
+																					<label>N:</label>
+																					<select class="form-control" id="categoria_n_patologico">
 																						<option value=""></option>
 																						<option value="NX">NX</option>
 																						<option value="N0">N0</option>
@@ -381,29 +414,17 @@
 																					</select>
 																				</div>
 																			</div>
-																			<div class="col-md-2">
+																			<div class="col-md-4">
 																				<div class="form-group">
-																					<label>Cat. M:</label>
-																					<select class="form-control" id="categoria_m">
+																					<label>M:</label>
+																					<select class="form-control" id="categoria_m_patologico">
 																						<option value=""></option>
 																						<option value="MX">MX</option>
 																						<option value="M0">M0</option>
 																						<option value="M1">M1</option>
 																					</select>
 																				</div>
-																			</div>
-																			<div class="col-md-2">
-																				<div class="form-group">
-																					<label>Cat. G:</label>
-																					<select class="form-control" id="categoria_g">
-																						<option value=""></option>
-																						<option value="GX">GX</option>
-																						<option value="G1">G1</option>
-																						<option value="G2">G2</option>
-																						<option value="G3-4">G3-4</option>
-																					</select>
-																				</div>
-																			</div>																			
+																			</div>																																				
 																		</div>
 																	</div>																														
 																</div>
@@ -425,7 +446,14 @@
 																	%>														
 																	</select>
 																</div>
+																
 															</div>
+															<div class="col-md-3">
+																<div class="form-group" id="div_apellido_paterno">
+																	<label>Describir:</label> 
+																	<input class="form-control" type="text" id="tratamiento_inicial_otros" />											
+																</div>
+															</div>															
 														</div>
 													</div>
 													<div class="tab-pane fade" id="tab_diagnostico">													

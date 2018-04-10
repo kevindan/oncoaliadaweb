@@ -29,12 +29,15 @@ public class Hc_cabecera {
 	private double gleason_mayor;
 	private double gleason_menor;
 	private double gleason_total;
-	private String categoria_t;
-	private String categoria_t_patologico;
+	private String categoria_t;	
 	private String categoria_n;
 	private String categoria_m;
-	private String categoria_g;
+	private String categoria_t_patologico;
+	private String categoria_n_patologico;
+	private String categoria_m_patologico;
 	private int tratamiento_inicial;
+	private String tratamiento_inicial_otros;
+	private String estadio;
 	private int eco_paciente;
 	private String fecha_ultimo_control;
 	private String fecha_falla_bioquimica;
@@ -88,16 +91,17 @@ public class Hc_cabecera {
 			int antecedente_neoplasia, String antecedente_neoplasia_cieo, double psa_debut, int histologia_id,
 			String histologia_especificacion, String fecha_diagnostico_histologico, int tipo_diagnostico_id,
 			int grupo_riesgo_id, double gleason_mayor, double gleason_menor, double gleason_total, String categoria_t,
-			String categoria_t_patologico, String categoria_n, String categoria_m, String categoria_g,
-			int tratamiento_inicial, int eco_paciente, String fecha_ultimo_control, String fecha_falla_bioquimica,
-			double psa_falla_bioquimica, int tratamiento_falla_bioquimica, String fecha_enfermedad_metastasica,
-			double psa_enfermedad_metastasica, int sintomatico_enfermedad_metastasica,
-			int enfermedad_metastasica_oligometastasico, int organo_enfermedad_metastasica,
-			int tratamiento_enfermedad_metastasica, int tecnica_radioterapia_enfermedad_metastasica,
-			double dosis_radioterapia_enfermedad_metastasica, String fecha_segunda_enfermedad_progresiva,
-			double psa_segunda_enfermedad_progresiva, int sintomatico_segunda_enfermedad_progresiva,
-			int segunda_enfermedad_progresiva_oligometastasico, int organo_segunda_enfermedad_progresiva,
-			int tratamiento_segunda_enfermedad_progresiva, int tecnica_radioterapia_segunda_enfermedad_progresiva,
+			String categoria_n, String categoria_m, String categoria_t_patologico, String categoria_n_patologico,
+			String categoria_m_patologico, int tratamiento_inicial, String tratamiento_inicial_otros, String estadio,
+			int eco_paciente, String fecha_ultimo_control, String fecha_falla_bioquimica, double psa_falla_bioquimica,
+			int tratamiento_falla_bioquimica, String fecha_enfermedad_metastasica, double psa_enfermedad_metastasica,
+			int sintomatico_enfermedad_metastasica, int enfermedad_metastasica_oligometastasico,
+			int organo_enfermedad_metastasica, int tratamiento_enfermedad_metastasica,
+			int tecnica_radioterapia_enfermedad_metastasica, double dosis_radioterapia_enfermedad_metastasica,
+			String fecha_segunda_enfermedad_progresiva, double psa_segunda_enfermedad_progresiva,
+			int sintomatico_segunda_enfermedad_progresiva, int segunda_enfermedad_progresiva_oligometastasico,
+			int organo_segunda_enfermedad_progresiva, int tratamiento_segunda_enfermedad_progresiva,
+			int tecnica_radioterapia_segunda_enfermedad_progresiva,
 			double dosis_radioterapia_segunda_enfermedad_progresiva, String fecha_tercera_enfermedad_progresiva,
 			double psa_tercera_enfermedad_progresiva, int sintomatico_tercera_enfermedad_progresiva,
 			int tercera_enfermedad_progresiva_oligometastasico, int organo_tercera_enfermedad_progresiva,
@@ -108,7 +112,7 @@ public class Hc_cabecera {
 			int tratamiento_cuarta_enfermedad_progresiva, int tecnica_radioterapia_cuarta_enfermedad_progresiva,
 			double dosis_radioterapia_cuarta_enfermedad_progresiva, String usuario, String fecha_registro,
 			String fecha_ultima_modificacion, int activo) {
-		super();
+		
 		this.hc_cabecera_id = hc_cabecera_id;
 		this.paciente_id = paciente_id;
 		this.antecedente_raza = antecedente_raza;
@@ -137,11 +141,14 @@ public class Hc_cabecera {
 		this.gleason_menor = gleason_menor;
 		this.gleason_total = gleason_total;
 		this.categoria_t = categoria_t;
-		this.categoria_t_patologico = categoria_t_patologico;
 		this.categoria_n = categoria_n;
 		this.categoria_m = categoria_m;
-		this.categoria_g = categoria_g;
+		this.categoria_t_patologico = categoria_t_patologico;
+		this.categoria_n_patologico = categoria_n_patologico;
+		this.categoria_m_patologico = categoria_m_patologico;
 		this.tratamiento_inicial = tratamiento_inicial;
+		this.tratamiento_inicial_otros = tratamiento_inicial_otros;
+		this.estadio = estadio;
 		this.eco_paciente = eco_paciente;
 		this.fecha_ultimo_control = fecha_ultimo_control;
 		this.fecha_falla_bioquimica = fecha_falla_bioquimica;
@@ -409,14 +416,6 @@ public class Hc_cabecera {
 		this.categoria_t = categoria_t;
 	}
 
-	public String getCategoria_t_patologico() {
-		return categoria_t_patologico;
-	}
-
-	public void setCategoria_t_patologico(String categoria_t_patologico) {
-		this.categoria_t_patologico = categoria_t_patologico;
-	}
-
 	public String getCategoria_n() {
 		return categoria_n;
 	}
@@ -433,12 +432,28 @@ public class Hc_cabecera {
 		this.categoria_m = categoria_m;
 	}
 
-	public String getCategoria_g() {
-		return categoria_g;
+	public String getCategoria_t_patologico() {
+		return categoria_t_patologico;
 	}
 
-	public void setCategoria_g(String categoria_g) {
-		this.categoria_g = categoria_g;
+	public void setCategoria_t_patologico(String categoria_t_patologico) {
+		this.categoria_t_patologico = categoria_t_patologico;
+	}
+
+	public String getCategoria_n_patologico() {
+		return categoria_n_patologico;
+	}
+
+	public void setCategoria_n_patologico(String categoria_n_patologico) {
+		this.categoria_n_patologico = categoria_n_patologico;
+	}
+
+	public String getCategoria_m_patologico() {
+		return categoria_m_patologico;
+	}
+
+	public void setCategoria_m_patologico(String categoria_m_patologico) {
+		this.categoria_m_patologico = categoria_m_patologico;
 	}
 
 	public int getTratamiento_inicial() {
@@ -447,6 +462,22 @@ public class Hc_cabecera {
 
 	public void setTratamiento_inicial(int tratamiento_inicial) {
 		this.tratamiento_inicial = tratamiento_inicial;
+	}
+
+	public String getTratamiento_inicial_otros() {
+		return tratamiento_inicial_otros;
+	}
+
+	public void setTratamiento_inicial_otros(String tratamiento_inicial_otros) {
+		this.tratamiento_inicial_otros = tratamiento_inicial_otros;
+	}
+
+	public String getEstadio() {
+		return estadio;
+	}
+
+	public void setEstadio(String estadio) {
+		this.estadio = estadio;
 	}
 
 	public int getEco_paciente() {
@@ -781,5 +812,5 @@ public class Hc_cabecera {
 	public void setActivo(int activo) {
 		this.activo = activo;
 	}
-
+	
 }
