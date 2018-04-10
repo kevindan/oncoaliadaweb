@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
+CREATE DATABASE  IF NOT EXISTS `oncodatdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `oncodatdb`;
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
--- Host: localhost    Database: oncodatdb
+-- Host: 127.0.0.1    Database: oncodatdb
 -- ------------------------------------------------------
--- Server version	5.7.21-0ubuntu0.16.04.1
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -280,11 +282,14 @@ CREATE TABLE `hc_cabecera` (
   `gleason_menor` int(11) DEFAULT NULL,
   `gleason_total` int(11) DEFAULT NULL,
   `categoria_t` varchar(10) DEFAULT NULL,
-  `categoria_t_patologico` varchar(10) DEFAULT NULL,
   `categoria_n` varchar(10) DEFAULT NULL,
   `categoria_m` varchar(10) DEFAULT NULL,
-  `categoria_g` varchar(10) DEFAULT NULL,
+  `categoria_t_patologico` varchar(10) DEFAULT NULL,
+  `categoria_n_patologico` varchar(10) DEFAULT NULL,
+  `categoria_m_patologico` varchar(10) DEFAULT NULL,
   `tratamiento_inicial` int(11) DEFAULT NULL,
+  `tratamiento_inicial_otros` text,
+  `estadio` varchar(10) DEFAULT NULL,
   `eco_paciente` int(11) DEFAULT NULL,
   `fecha_ultimo_control` date DEFAULT NULL,
   `fecha_falla_bioquimica` date DEFAULT NULL,
@@ -327,7 +332,7 @@ CREATE TABLE `hc_cabecera` (
   `fecha_ultima_modificacion` date DEFAULT NULL,
   `activo` bit(1) DEFAULT b'1',
   PRIMARY KEY (`hc_cabecera_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -336,7 +341,7 @@ CREATE TABLE `hc_cabecera` (
 
 LOCK TABLES `hc_cabecera` WRITE;
 /*!40000 ALTER TABLE `hc_cabecera` DISABLE KEYS */;
-INSERT INTO `hc_cabecera` VALUES (1,3,'',4,'','1','\0','','',29.06,'\0',0,'','','Plomo','\0','','C00.4',5.00,1,'Ninguna','2018-04-08',2,6,3,4,7,'TX','pT2','NX','MX','GX',2,0,NULL,'2018-04-08',5.30,1,'2018-04-08',5.30,'','',2,1,1,3.50,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,'2018-04-08',NULL,'');
+INSERT INTO `hc_cabecera` VALUES (1,3,'',4,'','1','\0','','',29.06,'\0',0,'','','Plomo','\0','','C00.4',5.00,1,'Ninguna','2018-04-08',2,6,3,4,7,'TX','NX','MX','pT2',NULL,NULL,2,NULL,NULL,0,NULL,'2018-04-08',5.30,1,'2018-04-08',5.30,'','',2,1,1,3.50,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,'2018-04-08',NULL,''),(2,0,'\0',0,'\0','','\0','\0','\0',0.00,'\0',0,'\0','\0','','\0','\0','',0.00,0,'',NULL,1,1,0,0,0,'','','','',NULL,NULL,0,NULL,NULL,0,NULL,NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,'2018-04-09',NULL,'');
 /*!40000 ALTER TABLE `hc_cabecera` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -435,7 +440,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (1,1,'6767','fgfgf','fgfgf','fgfg','1','2018-04-02','fgfgfg','5656',1,'\0',1,'C00.0','040601','2018-04-11','',NULL,'2018-04-08','2018-04-08',''),(2,1,'01234567','Kevin Daniel','Pinchi','García','1','1991-08-25','Jr. Castrovirreyna 225 - Breña','975683285',1,'\0',1,'C07.X','150105','2018-04-11','','admin','2018-04-08','2018-04-08','\0'),(3,1,'12345678','Masurash','Shimpo','Tayuji','1','2018-04-08','Lima','0',1,'\0',1,'C00.5','150101','2018-04-08','Ninguna','bretts','2018-04-08','2018-04-08','');
+INSERT INTO `paciente` VALUES (1,1,'6767','fgfgf','fgfgf','fgfg','1','2018-04-02','fgfgfg','5656',1,'\0',1,'C00.0','040601','2018-04-11','',NULL,'2018-04-08','2018-04-08',''),(2,1,'01234567','Kevin Daniel','Pinchi','García','1','1991-08-25','Jr. Castrovirreyna 225 - Breña','975683285',1,'\0',1,'C07.X','150105','2018-04-11','','admin','2018-04-08','2018-04-09',''),(3,1,'12345678','Masurash','Shimpo','Tayuji','1','2018-04-08','Lima','0',1,'\0',1,'C00.5','150101','2018-04-08','Ninguna','bretts','2018-04-08','2018-04-08','');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -809,6 +814,10 @@ LOCK TABLES `usuario` WRITE;
 INSERT INTO `usuario` VALUES (1,'Administrador','admin','admin@mail.com','admin',1,''),(2,'Ruth Milagros Huaringa Leiva','rmhuaringa','rmhuaringa@gmail.com','rmhuaringa123456',1,'\0'),(3,'Bretts Acuña','brettsacuna','brettsacuna@mail.com','brettsacuna$',2,'\0'),(4,'Usuario de prueba','usuario','usuario@gmail.com','admin123456',1,'\0'),(5,'Carlos Caballero','carlitos','carlosmecalux@gmail.com','carlitos',2,''),(6,'Bretts','bretts','brettsacuna@gmail.com','admin',1,'\0'),(7,'Bretts Acuña','brettsacuna','brettsacuna@gmail.com','brettsacuna',1,'');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'oncodatdb'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -819,4 +828,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-08 23:41:56
+-- Dump completed on 2018-04-09 20:25:14
