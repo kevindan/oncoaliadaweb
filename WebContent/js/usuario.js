@@ -140,6 +140,7 @@ $('#btnregistrarme').click(function(event){
 						$('div .form-group').removeClass('has-error');
 						limpiarpaneles();
 						limpiarcampos();
+						listar_usuarios()
 						$('#panel_mensaje').html('<div class="alert alert-success" role="alert">Usuario registrado con éxito</div>');
 													
 						

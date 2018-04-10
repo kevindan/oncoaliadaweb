@@ -18,6 +18,7 @@ import dao.Hc_cabeceraDao;
 import entity.Hc_cabecera;
 import entity.Hc_cabeceraVista;
 
+
 /**
  * Servlet implementation class Hc_cabeceraController
  */
@@ -186,6 +187,7 @@ public class Hc_cabeceraController extends HttpServlet {
 			hc_cabecera.setCategoria_m(request.getParameter("categoria_m"));
 			hc_cabecera.setCategoria_n_patologico(request.getParameter("categoria_n_patologico"));
 			hc_cabecera.setCategoria_m_patologico(request.getParameter("categoria_m_patologico"));
+			hc_cabecera.setEstadio(request.getParameter("estadio"));
 			
 			if (!(request.getParameter("tratamiento_inicial").equals(""))) {
 
@@ -385,6 +387,24 @@ public class Hc_cabeceraController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		}else if(opcion.equals("eliminar")){
+			
+			hc_cabecera = new Hc_cabecera();
+			hc_cabecera.setHc_cabecera_id(Integer.parseInt(request.getParameter("hc_cabecera_id")));
+			hc_cabecera.setUsuario(request.getParameter("usuario"));
+
+			try {
+				cabecera_dao = new Hc_cabeceraDao();				
+				cabecera_dao.Eliminar(hc_cabecera);
+				
+				response.getWriter().write("1");
+
+			} catch (Exception e) {
+				
+				response.getWriter().write("0");
+				e.printStackTrace();
+			}
+			
 		}
 				
 	}

@@ -52,35 +52,28 @@
                                        <br />
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" class="form-control" placeholder="Nombre de usuario " name="txtUsuario" id="usuario" autofocus="true" />
+                                            <input type="text" class="form-control" placeholder="Nombre de usuario" name="txtUsuario" id="usuario" autofocus="true" autocomplete="off"/>
                                         </div>
                                          <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="password" class="form-control"  placeholder="Contraseña" name="txtContrasena" id="contrasena"/>
+                                            <input type="password" class="form-control"  placeholder="Contraseña" name="txtContrasena" id="contrasena" autocomplete="off"/>
                                         </div>
                                         <div class="form-group" id ="panelmensaje">									
 								         </div>
                                     <div class="form-group" align="right">
                                             <label class="checkbox-inline">
                                                 <input type="checkbox" /> Recordarme
-                                            </label>
-                                        
-                                        </div>
-                                     
-                                   
+                                            </label>                                        
+                                        </div>                                                                        
                                     	<input type="submit" class="btn btn-primary " id = "btnIniciarSesion" name= "login" value = "Iniciar Sesión"> 
-                                    <hr />
-                               
-                                    </form>                                  
-                                    
+                                    <hr />                               
+                                    </form>
                             </div>
-                           
                         </div>
                     </div>              
                 
         </div>
     </div>
-
 
 	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 	<!-- JQUERY SCRIPTS -->
@@ -92,9 +85,8 @@
 	<!-- METISMENU SCRIPTS -->
 	<script src="assets/js/jquery.metisMenu.js"></script>
 	<!-- CUSTOM SCRIPTS -->
-<!--  	<script src="assets/js/custom.js"></script> -->
+	<!--  	<script src="assets/js/custom.js"></script> -->
 	<script src="http://code.jquery.com/jquery-latest.js"></script>	
-
 
 </body>
 </html>

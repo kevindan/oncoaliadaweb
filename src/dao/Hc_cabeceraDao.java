@@ -228,7 +228,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+"tecnica_radioterapia_cuarta_enfermedad_progresiva = ?, "
 					+"dosis_radioterapia_cuarta_enfermedad_progresiva = ? ,"
 					+"usuario = ?,"
-					+"fecha_ultima_actualizacion = sysdate() "
+					+"fecha_ultima_modificacion = sysdate() "
 					+" where hc_cabecera_id = ? and activo = 1 ";
 					
 
@@ -394,7 +394,7 @@ public class Hc_cabeceraDao implements Intermetodos<Hc_cabecera> {
 					+ " from hc_cabecera, paciente, diagnostico "
 					+ " where hc_cabecera.paciente_id = paciente.paciente_id and "
 					+ " paciente.codigo_cieo = diagnostico.codigo_cieo and "
-					+ " paciente.eliminado = 0 order by hc_cabecera_id asc ";
+					+ " paciente.eliminado = 0 and hc_cabecera.activo = 1 order by hc_cabecera_id asc ";
 			// crear statement
 			Statement stm = cn.createStatement();
 			// ejecutar comando y obtener resultados

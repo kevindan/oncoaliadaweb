@@ -332,7 +332,7 @@ CREATE TABLE `hc_cabecera` (
   `fecha_ultima_modificacion` date DEFAULT NULL,
   `activo` bit(1) DEFAULT b'1',
   PRIMARY KEY (`hc_cabecera_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +341,7 @@ CREATE TABLE `hc_cabecera` (
 
 LOCK TABLES `hc_cabecera` WRITE;
 /*!40000 ALTER TABLE `hc_cabecera` DISABLE KEYS */;
-INSERT INTO `hc_cabecera` VALUES (1,3,'',4,'','1','\0','','',29.06,'\0',0,'','','Plomo','\0','','C00.4',5.00,1,'Ninguna','2018-04-08',2,6,3,4,7,'TX','NX','MX','pT2',NULL,NULL,2,NULL,NULL,0,NULL,'2018-04-08',5.30,1,'2018-04-08',5.30,'','',2,1,1,3.50,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,'2018-04-08',NULL,''),(2,0,'\0',0,'\0','','\0','\0','\0',0.00,'\0',0,'\0','\0','','\0','\0','',0.00,0,'',NULL,1,1,0,0,0,'','','','',NULL,NULL,0,NULL,NULL,0,NULL,NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,'2018-04-09',NULL,'');
+INSERT INTO `hc_cabecera` VALUES (1,1,'',0,'\0','','\0','\0','\0',0.00,'',1,'\0','','Mercurio','\0','','C00.4',5.00,1,'sdsd','2018-04-05',1,1,4,3,7,'T0','NX','M0','pT2a','NX','MX',1,'ninguno','IIA',0,'2018-04-06',NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,'admin','2018-04-10','2018-04-10','\0'),(2,1,'',0,'','1','\0','\0','',35.16,'',2,'','','','','','C00.9',0.00,0,'',NULL,1,1,0,0,0,'','','','','','',0,'','I',0,'2018-04-06',NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,'admin','2018-04-10','2018-04-10','\0'),(3,1,'',0,'\0','','','\0','',27.78,'',1,'','','plomo','','\0','',0.00,0,'',NULL,1,1,0,0,0,'','','','','','',0,'','I',0,NULL,NULL,0.00,0,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,NULL,0.00,'\0','\0',0,0,0,0.00,'admin','2018-04-10','2018-04-10','\0');
 /*!40000 ALTER TABLE `hc_cabecera` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,13 +414,16 @@ CREATE TABLE `paciente` (
   `direccion` varchar(200) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `tipo_paciente` int(11) NOT NULL,
-  `fallecido` bit(1) NOT NULL,
   `base_diagnostico_id` int(11) NOT NULL,
   `codigo_cieo` varchar(8) DEFAULT NULL,
   `codigo_ubigeo` varchar(8) DEFAULT NULL,
   `fecha_diagnostico` date DEFAULT NULL,
   `observacion` varchar(200) DEFAULT NULL,
   `usuario` varchar(100) DEFAULT NULL,
+  `fallecido` bit(1) NOT NULL,
+  `fecha_fallecimiento` date DEFAULT NULL,
+  `fallecido_neoplasia` bit(1) DEFAULT NULL,
+  `otras_causas` text,
   `fecha_registro` date NOT NULL,
   `fecha_ultima_modificacion` date DEFAULT NULL,
   `eliminado` bit(1) NOT NULL,
@@ -431,7 +434,7 @@ CREATE TABLE `paciente` (
   CONSTRAINT `fk_paciente_base_diagnostico` FOREIGN KEY (`base_diagnostico_id`) REFERENCES `base_diagnostico` (`base_diagnostico_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_paciente_diagnostico` FOREIGN KEY (`codigo_cieo`) REFERENCES `diagnostico` (`codigo_cieo`),
   CONSTRAINT `fk_paciente_tipo_doc` FOREIGN KEY (`tipo_documento_id`) REFERENCES `tipo_documento` (`tipo_documento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,7 +443,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (1,1,'6767','fgfgf','fgfgf','fgfg','1','2018-04-02','fgfgfg','5656',1,'\0',1,'C00.0','040601','2018-04-11','',NULL,'2018-04-08','2018-04-08',''),(2,1,'01234567','Kevin Daniel','Pinchi','García','1','1991-08-25','Jr. Castrovirreyna 225 - Breña','975683285',1,'\0',1,'C07.X','150105','2018-04-11','','admin','2018-04-08','2018-04-09',''),(3,1,'12345678','Masurash','Shimpo','Tayuji','1','2018-04-08','Lima','0',1,'\0',1,'C00.5','150101','2018-04-08','Ninguna','bretts','2018-04-08','2018-04-08','');
+INSERT INTO `paciente` VALUES (1,1,'98745632','yuyuyu','yuyuy','yuyu','1','2018-04-03','yuyuy','999999999',1,1,'C61.X','080501','2018-04-03','errrtrtrt','admin','\0',NULL,NULL,'null','2018-04-10',NULL,'\0');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -802,7 +805,7 @@ CREATE TABLE `usuario` (
   `id_tipo_usuario` int(11) DEFAULT NULL,
   `activo` bit(1) DEFAULT b'1',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -811,7 +814,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Administrador','admin','admin@mail.com','admin',1,''),(2,'Ruth Milagros Huaringa Leiva','rmhuaringa','rmhuaringa@gmail.com','rmhuaringa123456',1,'\0'),(3,'Bretts Acuña','brettsacuna','brettsacuna@mail.com','brettsacuna$',2,'\0'),(4,'Usuario de prueba','usuario','usuario@gmail.com','admin123456',1,'\0'),(5,'Carlos Caballero','carlitos','carlosmecalux@gmail.com','carlitos',2,''),(6,'Bretts','bretts','brettsacuna@gmail.com','admin',1,'\0'),(7,'Bretts Acuña','brettsacuna','brettsacuna@gmail.com','brettsacuna',1,'');
+INSERT INTO `usuario` VALUES (1,'Administrador','admin','admin@oncoaliada.pe','admin',1,''),(2,'Milagro Huaringa','mhuaringa','milahuaringa@gmail.com','mhuaringa123456',2,''),(3,'José Ramirez','jramirez','jose.ramirez@aliada.com.pe','jramirez123456',2,''),(4,'Luis Longa','llonga','onelonga@gmail.com','llonga123456',2,''),(5,'José Revilla','jrevilla','jose.revilla@aliada.com.pe','jrevilla123456',2,''),(6,'Daniel Hidalgo Cuellar','dhidalgo','dylhidalgo@yahoo.es','dhidalgo123456',2,''),(7,'Juna Manuel Paredes Torres','jparedes','manuelparedes2014@hotmail.com','jparedes123456',1,''),(8,'Karina quispe Santivañez','kquispe','karinaq51@hotmail.com','kquispe123456',2,'');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -828,4 +831,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-09 20:25:14
+-- Dump completed on 2018-04-10 18:26:37

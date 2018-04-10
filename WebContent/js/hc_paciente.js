@@ -10,6 +10,11 @@ $(document).ready(function() {
 	$('#fecha_tercera_enfermedad_progresiva').datepicker();
 	$('#fecha_cuarta_enfermedad_progresiva').datepicker();
 	$('#fecha_diagnostico_histologico').datepicker();
+	
+	$('#panel_datos_hc_paciente').hide();
+	
+	$('#btn_guardar_hc').hide();
+	$('#btn_nuevo_hc').hide();
 		
 	carga_grupo_tumor(1);
 	lista_pacientes_hc();
@@ -181,16 +186,23 @@ function grabar_hc(){
 	var histologia_idVar = $('#histologia_id').val();
 	var histologia_especificacionVar = $('#histologia_especificacion').val();
 	var fecha_diagnostico_histologicoVar = $('#fecha_diagnostico_histologico').val();
+	
 	var gleason_mayorVar = $('#gleason_mayor').val();
 	var gleason_menorVar = $('#gleason_menor').val();
 	var gleason_totalVar = $('#gleason_total').val();
-	var categoria_tVar = $('#categoria_t').val();
-	var categoria_t_patologicoVar = $('#categoria_t_patologico').val();
+	
+	var categoria_tVar = $('#categoria_t').val();	
 	var categoria_nVar = $('#categoria_n').val();
 	var categoria_mVar = $('#categoria_m').val();
-	var categoria_gVar = $('#categoria_g').val();
+	
+	var categoria_t_patologicoVar = $('#categoria_t_patologico').val();
+	var categoria_n_patologicoVar = $('#categoria_n_patologico').val();
+	var categoria_m_patologicoVar = $('#categoria_m_patologico').val();
+	
+	var estadioVar = $('#estadio').val();
 	
 	var tratamiento_inicialVar = $('#tratamiento_inicial').val();
+	var tratamiento_inicial_otrosVar = $('#tratamiento_inicial_otros').val();
 	var tipo_diagnostico_idVar = $('#tipo_diagnostico_id').val();
 	var grupo_riesgo_idVar = $('#grupo_riesgo_id').val();
 	
@@ -234,6 +246,8 @@ function grabar_hc(){
 	var tecnica_radioterapia_cuarta_enfermedad_progresivaVar = $('#tecnica_radioterapia_cuarta_enfermedad_progresiva').val();
 	var dosis_cuarta_enfermedad_progresivaVar = $('#dosis_cuarta_enfermedad_progresiva').val();
 	
+	var usuarioVar = $('#usuario_session').val();
+	
 	$.post('Hc_cabeceraController',
 					{
 
@@ -269,13 +283,18 @@ function grabar_hc(){
 						gleason_mayor : gleason_mayorVar,
 						gleason_menor : gleason_menorVar,
 						gleason_total : gleason_totalVar,
-						categoria_t : categoria_tVar,
-						categoria_t_patologico : categoria_t_patologicoVar,
+						
+						categoria_t : categoria_tVar,						
 						categoria_n : categoria_nVar,
 						categoria_m : categoria_mVar,
-						categoria_g : categoria_gVar,
+						categoria_t_patologico : categoria_t_patologicoVar,
+						categoria_n_patologico : categoria_n_patologicoVar,
+						categoria_m_patologico : categoria_m_patologicoVar,
+						
+						estadio : estadioVar,
 						
 						tratamiento_inicial : tratamiento_inicialVar,
+						tratamiento_inicial_otros : tratamiento_inicial_otrosVar,
 						tipo_diagnostico_id : tipo_diagnostico_idVar,
 						grupo_riesgo_id : grupo_riesgo_idVar,
 						
@@ -317,8 +336,9 @@ function grabar_hc(){
 						organo_cuarta_enfermedad_progresiva : organo_cuarta_enfermedad_progresivaVar,
 						tratamiento_cuarta_enfermedad_progresiva : tratamiento_cuarta_enfermedad_progresivaVar,
 						tecnica_radioterapia_cuarta_enfermedad_progresiva : tecnica_radioterapia_cuarta_enfermedad_progresivaVar,
-						dosis_radioterapia_cuarta_enfermedad_progresiva : dosis_cuarta_enfermedad_progresivaVar
+						dosis_radioterapia_cuarta_enfermedad_progresiva : dosis_cuarta_enfermedad_progresivaVar,
 						
+						usuario : usuarioVar
 					},
 					
 					function(response) {
@@ -326,12 +346,13 @@ function grabar_hc(){
 						if (response == 1) {
 																					
 							 lista_pacientes_hc();							
-
-							$('#panel_mensaje_hc').html('<div class="alert alert-success" align="center" role="alert">Variables registradas con éxito</div>');
-							$('#btn_guardar_hc').hide();
-							
+							 limpiar();
+							 $('#btn_guardar_hc').hide();							 
+							 $('#panel_mensaje_hc').html('<div class="alert alert-success" align="center" role="alert">Variables registradas con éxito</div>');
+							 $('#btn_nuevo_hc').show();
+							 
 						} else if (response == 0) {
-							$('#panel_mensaje_hc').html('<div class="alert alert-danger" align="center" role="alert">¡Error!</div>');
+							 $('#panel_mensaje_hc').html('<div class="alert alert-danger" align="center" role="alert">¡Error!</div>');
 
 						} 
 
@@ -353,7 +374,7 @@ function lista_pacientes_hc(){
 			
 			var body = "";
 			
-			var usuario = $('#usuario').val();
+			var usuario = $('#usuario_session').val();
 			var tipo_usuario = $('#tipo_usuario').val();
 			
 			$.each(response, function(index, paciente_hc){
@@ -574,13 +595,18 @@ function cargar_datos_hc_paciente(hc_cabecera_id) {
 		$('#gleason_mayor').val(response.gleason_mayor);
 		$('#gleason_menor').val(response.gleason_menor);
 		$('#gleason_total').val(response.gleason_total);
-		$('#categoria_t').val(response.categoria_t);
-		$('#categoria_t_patologico').val(response.categoria_t_patologico);
+		
+		$('#categoria_t').val(response.categoria_t);		
 		$('#categoria_n').val(response.categoria_n);
 		$('#categoria_m').val(response.categoria_m);
-		$('#categoria_g').val(response.categoria_g);
+		$('#categoria_t_patologico').val(response.categoria_t_patologico);		
+		$('#categoria_n_patologico').val(response.categoria_n_patologico);
+		$('#categoria_m_patologico').val(response.categoria_m_patologico);
+		
+		$('#estadio').val(response.estadio);
 		
 		$('#tratamiento_inicial').val(response.tratamiento_inicial);
+		$('#tratamiento_inicial_otros').val(response.tratamiento_inicial_otros);
 		
 		$('#tipo_diagnostico_id').val(response.tipo_diagnostico_id);
 			
@@ -626,7 +652,10 @@ function cargar_datos_hc_paciente(hc_cabecera_id) {
 		$('#tecnica_radioterapia_cuarta_enfermedad_progresiva').val(response.tecnica_radioterapia_cuarta_enfermedad_progresiva);
 		$('#dosis_cuarta_enfermedad_progresiva').val(response.dosis_radioterapia_cuarta_enfermedad_progresiva);
 	
-	
+		$('#panel_datos_hc_paciente').show();
+		
+		$('#btn_guardar_hc').show();
+		$('#btn_nuevo_hc').show();
 		
 	});
 
@@ -640,7 +669,7 @@ function ver_datos_hc_paciente(hc_cabecera_id){
 	
 	inhabilita_campos_hc_paciente();
 	
-	$('#btn_guardar_hc_paciente').attr('disabled',true);
+	$('#btn_guardar_hc').attr('disabled',true);
 	
 }
 
@@ -652,8 +681,52 @@ function editar_datos_hc_paciente(hc_cabecera_id){
 	
 	habilita_campos_hc_paciente();
 	
-	$('#btn_guardar_hc_paciente').attr('disabled',false);
+	$('#btn_guardar_hc').attr('disabled',false);
 	
+}
+
+function carga_hc_paciente_eliminar(hc_cabecera_id,numero_documento){
+	
+	$('#hc_cabecera_id').val(hc_cabecera_id);
+	$('#panel_mensaje_confirma_hc').html('<h5>¿Confirma eliminar el registro de variables del paciente <strong>'+numero_documento+'</strong>?</h5>');
+	console.log(hc_cabecera_id);
+}
+
+$('#btn_eliminar_hc').click(function(event){
+	var hc_cabecera_id = $('#hc_cabecera_id').val();
+	eliminar_hc_paciente(hc_cabecera_id);
+});
+
+$('#btn_cancelar_hc').click(function(event){
+	$('#hc_cabecera_id').val('');
+});
+
+function eliminar_hc_paciente(hc_cabecera_id) {
+
+	var opcionVar = "eliminar";
+	//var hc_cabecera_id_Var = hc_cabecera_id;
+	var usuarioVar = $('#usuario_session').val();
+
+	$.post('Hc_cabeceraController', {
+
+		opcion : opcionVar,
+		hc_cabecera_id : hc_cabecera_id,
+		usuario : usuarioVar
+
+	}, function(response) {
+		
+		if(response == 1){
+						
+			lista_pacientes_hc();
+			 			
+		}else if(response == 0){
+						
+			alert('Error');
+			
+		}
+		
+	});
+
 }
 
 function carga_grupo_tumor(tipo_diagnostico_id){
@@ -706,6 +779,7 @@ function carga_paciente(paciente_id) {
 			
 			limpiar();
 			$('#panel_mensaje_hc').html('<div class="alert alert-info" align="center" role="alert">Paciente ya tiene registro de variables</div>');
+			 $('#btn_nuevo_hc').show();
 			
 		}else{
 			
@@ -720,6 +794,11 @@ function carga_paciente(paciente_id) {
 			$('#fecha_nacimiento').val(response.fecha_nacimiento);
 			$('#codigo_cieo').val(response.codigo_cieo);
 			$('#descripcion').val(response.descripcion);
+			
+			$('#panel_datos_hc_paciente').show();
+			
+			$('#btn_guardar_hc').show();
+			$('#btn_nuevo_hc').show();
 			
 		}
 		
@@ -862,6 +941,11 @@ function limpiar(){
 	$('#label_antecedente_neoplasia').removeClass('checked');
 	$('#panel_antecedente_neoplasia').addClass('hide');
 	
+	$('#panel_datos_hc_paciente').hide();
+	
+	$('#btn_guardar_hc').hide();
+	$('#btn_nuevo_hc').hide();
+	
 }
 
 function inhabilita_campos_hc_paciente(){
@@ -892,12 +976,18 @@ function inhabilita_campos_hc_paciente(){
 	$('#gleason_mayor').attr('disabled',true);
 	$('#gleason_menor').attr('disabled',true);
 	$('#gleason_total').attr('disabled',true);
-	$('#categoria_t').attr('disabled',true);
-	$('#categoria_t_patologico').attr('disabled',true);
+	
+	$('#categoria_t').attr('disabled',true);	
 	$('#categoria_n').attr('disabled',true);
-	$('#categoria_m').attr('disabled',true);
-	$('#categoria_g').attr('disabled',true);	
-	$('#tratamiento_inicial').attr('disabled',true);	
+	$('#categoria_m').attr('disabled',true);	
+	$('#categoria_t_patologico').attr('disabled',true);
+	$('#categoria_n_patologico').attr('disabled',true);
+	$('#categoria_m_patologico').attr('disabled',true);
+	
+	$('#estadio').attr('disabled',true);
+	
+	$('#tratamiento_inicial').attr('disabled',true);
+	$('#tratamiento_inicial_otros').attr('disabled',true);
 	$('#tipo_diagnostico_id').attr('disabled',true);		
 	$('#grupo_riesgo_id').attr('disabled',true);	
 	$('#fecha_falla_bioquimica').attr('disabled',true);
@@ -972,12 +1062,19 @@ function habilita_campos_hc_paciente(){
 	$('#gleason_mayor').attr('disabled',false);
 	$('#gleason_menor').attr('disabled',false);
 	$('#gleason_total').attr('disabled',false);
-	$('#categoria_t').attr('disabled',false);
-	$('#categoria_t_patologico').attr('disabled',false);
+	
+	$('#categoria_t').attr('disabled',false);	
 	$('#categoria_n').attr('disabled',false);
-	$('#categoria_m').attr('disabled',false);
-	$('#categoria_g').attr('disabled',false);	
-	$('#tratamiento_inicial').attr('disabled',false);	
+	$('#categoria_m').attr('disabled',false);	
+	$('#categoria_t_patologico').attr('disabled',false);
+	$('#categoria_n_patologico').attr('disabled',false);
+	$('#categoria_m_patologico').attr('disabled',false);
+	
+	$('#estadio').attr('disabled',false);
+		
+	
+	$('#tratamiento_inicial').attr('disabled',false);
+	$('#tratamiento_inicial_otros').attr('disabled',false);
 	$('#tipo_diagnostico_id').attr('disabled',false);		
 	$('#grupo_riesgo_id').attr('disabled',false);	
 	$('#fecha_falla_bioquimica').attr('disabled',false);

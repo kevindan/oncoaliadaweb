@@ -350,7 +350,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
                     + " tipo_paciente, "
                     + " base_diagnostico_id, "
                     + " codigo_cieo,codigo_ubigeo,date_format(fecha_diagnostico,'%m/%d/%Y') as fecha_diagnostico,observacion from paciente "
-                    + " where paciente_id = ? and eliminado = 0 ";
+                    + " where paciente_id = ? and eliminado = 0 and fallecido = 0 ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
             pstm.setInt(1, o.getPaciente_id());
@@ -392,8 +392,10 @@ public class PacienteDao implements Intermetodos<Paciente> {
     }
     
     public Paciente ValidaDocumento(Paciente o) throws Exception {
+    	
         Connection cn = null;
         Paciente p = new Paciente();
+        
         try {
             cn = DataAccess.getConnection();
 
@@ -456,7 +458,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
                     + " paciente.tipo_paciente, "
                     + " paciente.base_diagnostico_id, "
                     + " paciente.codigo_cieo,diagnostico.descripcion,paciente.codigo_ubigeo,paciente.fecha_diagnostico,paciente.observacion from paciente, diagnostico "
-                    + " where paciente.codigo_cieo = diagnostico.codigo_cieo and paciente.paciente_id = ? and paciente.eliminado = 0 ";
+                    + " where paciente.codigo_cieo = diagnostico.codigo_cieo and paciente.paciente_id = ? and paciente.eliminado = 0 and paciente.fallecido = 0";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
             pstm.setInt(1, o.getPaciente_id());
@@ -498,4 +500,144 @@ public class PacienteDao implements Intermetodos<Paciente> {
         return p;
     }
     
+    public void RegistraFallecido(Paciente o) throws Exception {
+    	
+        Connection cn = null;
+        
+        try {
+        	
+            cn = DataAccess.getConnection();
+            cn.setAutoCommit(false);
+            String sql = " update paciente set fallecido = 1, fecha_fallecimiento = ?, fallecido_neoplasia = ?, "
+                    + " otras_causas = ?,usuario = ?,fecha_ultima_modificacion = sysdate() "
+                    + " where paciente_id = ? and eliminado = 0 ";
+
+            PreparedStatement pstm = cn.prepareStatement(sql);
+            
+            pstm.setString(1, o.getFecha_fallecimiento());
+            pstm.setInt(2, o.getFallecido_neoplasia());
+            pstm.setString(3, o.getOtras_causas());
+            pstm.setString(4, o.getUsuario());
+        
+            pstm.setInt(5, o.getPaciente_id());
+
+            pstm.executeUpdate();
+
+            pstm.close();
+
+            cn.commit();
+
+        } catch (Exception e) {
+            try {
+                cn.rollback();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            throw e;
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    } 
+    
+    public List<Paciente> ListarFallecidos() throws Exception {
+
+        Connection cn = null;
+        List<Paciente> lista = new ArrayList<Paciente>();
+        try {
+            // conexion a la base de datos
+            cn = DataAccess.getConnection();
+            //comando sql
+            String sql = " select paciente_id,numero_documento,nombres,"
+                    + " apellido_paterno,apellido_materno,fecha_fallecimiento,usuario "
+                    + " from paciente where eliminado = 0 and fallecido = 1 order by nombres asc ";
+            // crear statement
+            Statement stm = cn.createStatement();
+            // ejecutar comando y obtener resultados
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Paciente p = new Paciente();
+                //asignar valores al objeto r
+                p.setPaciente_id(rs.getInt("paciente_id"));
+                p.setNumero_documento(rs.getString("numero_documento"));
+                p.setNombres(rs.getString("nombres"));
+                p.setApellido_paterno(rs.getString("apellido_paterno"));
+                p.setApellido_materno(rs.getString("apellido_materno"));
+                p.setFecha_fallecimiento(rs.getString("fecha_fallecimiento"));
+                p.setUsuario(rs.getString("usuario"));
+
+                lista.add(p);
+            }
+            // cerrar cursor
+            rs.close();
+            stm.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return lista;
+    }
+
+    public Paciente BuscarFallecido(Paciente o) throws Exception {
+        Connection cn = null;
+        Paciente p = new Paciente();
+        try {
+            cn = DataAccess.getConnection();
+
+            String sql = " select paciente_id,tipo_documento_id,numero_documento, "
+                    + " nombres,apellido_paterno,apellido_materno,sexo,date_format(fecha_nacimiento, '%m/%d/%Y') as fecha_nacimiento, "
+                    + " direccion,telefono, "
+                    + " tipo_paciente, "
+                    + " base_diagnostico_id, "
+                    + " codigo_cieo,codigo_ubigeo,date_format(fecha_diagnostico,'%m/%d/%Y') as fecha_diagnostico,observacion, "
+                    + " fecha_fallecimiento,fallecido_neoplasia,otras_causas "
+                    + " from paciente "
+                    + " where paciente_id = ? and eliminado = 0 and fallecido = 1 ";
+
+            PreparedStatement pstm = cn.prepareStatement(sql);
+            pstm.setInt(1, o.getPaciente_id());
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                p.setPaciente_id(rs.getInt("paciente_id"));
+                p.setTipo_documento_id(rs.getInt("tipo_documento_id"));
+                p.setNumero_documento(rs.getString("numero_documento"));
+                p.setNombres(rs.getString("nombres"));
+                p.setApellido_paterno(rs.getString("apellido_paterno"));
+                p.setApellido_materno(rs.getString("apellido_materno"));
+                p.setSexo(rs.getString("sexo"));
+                p.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
+                p.setDireccion(rs.getString("direccion"));
+                p.setTelefono(rs.getString("telefono"));
+                p.setTipo_paciente(rs.getInt("tipo_paciente"));               
+                p.setBase_diagnostico_id(rs.getInt("base_diagnostico_id"));                
+                p.setCodigo_cieo(rs.getString("codigo_cieo"));
+                p.setCodigo_ubigeo(rs.getString("codigo_ubigeo"));
+                p.setFecha_diagnostico(rs.getString("fecha_diagnostico"));
+                p.setObservacion(rs.getString("observacion"));
+              
+
+            }
+            rs.close();
+            pstm.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return p;
+    }
 }

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 			
-	$('#btnactualizar').hide();
+	$('#btnactualizar').hide();	
 			
 });
 
@@ -49,5 +49,6 @@ function habilita_campos_usuario(){
 	$('#email').attr('disabled',false);
 	$('#confirmcontrasena').attr('disabled',false);
 	$('#id_tipo_usuario').attr('disabled',false);
+	
 	
 }

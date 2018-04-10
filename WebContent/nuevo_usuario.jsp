@@ -4,8 +4,7 @@
 <%@page import="dao.TipoUsuarioDao"%>
 <%@page import="entity.TipoUsuario"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-    
+    pageEncoding="utf-8"%>    
 <!-- Variables temporales -->
 <input type="hidden" id="id_usuario" value="">
  

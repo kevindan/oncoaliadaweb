@@ -20,6 +20,9 @@ public class Paciente {
     private String codigo_ubigeo;
     private String fecha_diagnostico;
     private String observacion;
+    private String fecha_fallecimiento;
+    private int fallecido_neoplasia;
+    private String otras_causas;
     private String usuario;
     private String fecha_ultima_modificacion;
     private int eliminado;
@@ -31,9 +34,10 @@ public class Paciente {
 	public Paciente(int paciente_id, int tipo_documento_id, String numero_documento, String nombres,
 			String apellido_paterno, String apellido_materno, String sexo, String fecha_nacimiento, String direccion,
 			String telefono, String fecha_registro, int tipo_paciente, int fallecido, int base_diagnostico_id,
-			String codigo_cieo, String codigo_ubigeo, String fecha_diagnostico, String observacion, String usuario,
+			String codigo_cieo, String codigo_ubigeo, String fecha_diagnostico, String observacion,
+			String fecha_fallecimiento, int fallecido_neoplasia, String otras_causas, String usuario,
 			String fecha_ultima_modificacion, int eliminado) {
-		super();
+	
 		this.paciente_id = paciente_id;
 		this.tipo_documento_id = tipo_documento_id;
 		this.numero_documento = numero_documento;
@@ -52,6 +56,9 @@ public class Paciente {
 		this.codigo_ubigeo = codigo_ubigeo;
 		this.fecha_diagnostico = fecha_diagnostico;
 		this.observacion = observacion;
+		this.fecha_fallecimiento = fecha_fallecimiento;
+		this.fallecido_neoplasia = fallecido_neoplasia;
+		this.otras_causas = otras_causas;
 		this.usuario = usuario;
 		this.fecha_ultima_modificacion = fecha_ultima_modificacion;
 		this.eliminado = eliminado;
@@ -201,6 +208,30 @@ public class Paciente {
 		this.observacion = observacion;
 	}
 
+	public String getFecha_fallecimiento() {
+		return fecha_fallecimiento;
+	}
+
+	public void setFecha_fallecimiento(String fecha_fallecimiento) {
+		this.fecha_fallecimiento = fecha_fallecimiento;
+	}
+
+	public int getFallecido_neoplasia() {
+		return fallecido_neoplasia;
+	}
+
+	public void setFallecido_neoplasia(int fallecido_neoplasia) {
+		this.fallecido_neoplasia = fallecido_neoplasia;
+	}
+
+	public String getOtras_causas() {
+		return otras_causas;
+	}
+
+	public void setOtras_causas(String otras_causas) {
+		this.otras_causas = otras_causas;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -224,6 +255,5 @@ public class Paciente {
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
 	}
-	  
 
 }

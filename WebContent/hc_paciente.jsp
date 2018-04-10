@@ -134,7 +134,7 @@
 										</div>
 									</div>								
 								</div>
-								<div class="row">
+								<div class="row" id="panel_datos_hc_paciente">
 									<div class="col-md-12">
 										<div class="panel with-nav-tabs panel-primary">
 											<div class="panel-heading">
@@ -427,6 +427,22 @@
 																			</div>																																				
 																		</div>
 																	</div>																														
+																</div>
+															</div>
+															<div class="col-md-2">
+																<div class="form-group">
+																	<label>Estadio:</label>
+																	<select class="form-control" id="estadio">
+																		<option value="I">I</option>
+																		<option value="IIA">IIA</option>
+																		<option value="IIB">IIB</option>
+																		<option value="IIC">IIC</option>
+																		<option value="IIIA">IIIA</option>
+																		<option value="IIIB">IIIB</option>
+																		<option value="IIIC">IIIC</option>
+																		<option value="IVA">IVA</option>
+																		<option value="IVB">IVB</option>
+																	</select>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -1040,7 +1056,7 @@
 	</div>
 </div>
 
-	<!--INICIO DE VENTANA MODAL PARA MENSAJES  -->
+	<!--INICIO DE VENTANA MODAL PARA cie-o  -->
 <div class="modal fade" tabindex="-1" id="modal_cieo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -1096,7 +1112,29 @@
 </div>
 	<!-- FIN DE VENTANA MODAL PARA MENSAJES -->
 
-
+<!--INICIO DE VENTANA MODAL PARA ELIMINAR -->
+<div class="modal fade"  id="modal_confirma_eliminar_hc_paciente" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-ms">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" ><strong>Confirmación</strong></h5>                
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+			<div class="col-sm-12">
+				<div id="panel_mensaje_confirma_hc">
+				</div>
+			</div>
+      	</div>       
+      </div>
+      <div class="modal-footer">      
+         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar" id="btn_cancelar_hc">
+         <input type="button" class="btn btn-danger" data-dismiss="modal" value="Eliminar" id="btn_eliminar_hc">        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN DE VENTANA MODAL PARA ELIMINAR -->		
 	<!-- JQUERY CHECKBOXES -->
 	<script src="assets/js/bootstrap-check.js"></script>
 	<script src="js/hc_paciente.js"></script>
