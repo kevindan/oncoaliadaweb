@@ -598,7 +598,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
                     + " tipo_paciente, "
                     + " base_diagnostico_id, "
                     + " codigo_cieo,codigo_ubigeo,date_format(fecha_diagnostico,'%m/%d/%Y') as fecha_diagnostico,observacion, "
-                    + " fecha_fallecimiento,fallecido_neoplasia,otras_causas "
+                    + " date_format(fecha_fallecimiento,'%m/%d/%Y') as fecha_fallecimiento,fallecido_neoplasia,otras_causas "
                     + " from paciente "
                     + " where paciente_id = ? and eliminado = 0 and fallecido = 1 ";
 
@@ -624,6 +624,9 @@ public class PacienteDao implements Intermetodos<Paciente> {
                 p.setCodigo_ubigeo(rs.getString("codigo_ubigeo"));
                 p.setFecha_diagnostico(rs.getString("fecha_diagnostico"));
                 p.setObservacion(rs.getString("observacion"));
+                p.setFecha_fallecimiento(rs.getString("fecha_fallecimiento"));
+                p.setFallecido_neoplasia(rs.getInt("fallecido_neoplasia"));
+                p.setOtras_causas(rs.getString("otras_causas"));
               
 
             }

@@ -89,6 +89,46 @@ public class PacienteController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (opcion.equals("listar_fallecidos")) {
+
+			try {
+
+				pacienteDao = new PacienteDao();
+
+				List<Paciente> fallecidos = pacienteDao.ListarFallecidos();
+
+				String json = new Gson().toJson(fallecidos);
+
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}else if (opcion.equals("buscar_fallecido")) {
+
+			paciente = new Paciente();
+
+			paciente.setPaciente_id(Integer.parseInt(request.getParameter("paciente_id")));
+
+			try {
+
+				pacienteDao = new PacienteDao();
+
+				paciente = pacienteDao.BuscarFallecido(paciente);
+
+				String json = new Gson().toJson(paciente);
+
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 		
 	}

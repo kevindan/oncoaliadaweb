@@ -95,7 +95,10 @@
                     </li>
                      <li  >
                         <a  href="#" onclick="cargacontenido('hc_paciente.jsp')"><i class="fa fa-list-alt fa-3x"></i> Variables del Paciente </a>
-                    </li>	
+                    </li>
+                    <li  >
+                        <a  href="#" onclick="cargacontenido('fallecidos.jsp')"><i class="fa fa-list-alt fa-3x"></i> Fallecimiento</a>
+                    </li>		
                     <li  >
                         <a  href="#"><i class="fa fa-bar-chart-o fa-3x"></i> Reportes</a>
                     </li>				
