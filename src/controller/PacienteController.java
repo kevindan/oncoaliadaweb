@@ -212,7 +212,7 @@ public class PacienteController extends HttpServlet {
 				
 				boolean existe = hc_cabeceraDao.ValidaExistencia(paciente);
 				
-				if(existe == false){
+				if(existe == true){
 					
 					pacienteDao = new PacienteDao();
 					pacienteDiag = new PacienteDiag();

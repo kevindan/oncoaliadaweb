@@ -103,7 +103,15 @@
 									</div>
 								</div>								
 								<div class="row" id="panel_datos_fallecido">
-									
+									<div class="col-md-12">
+										<div class="panel panel-primary">
+											<div class="panel-heading">
+												Datos del fallecimiento											
+											</div>
+											<div class="panel-body">
+											</div>
+										</div>
+									</div>											
 								</div>
 								<div class="row">
 							 		<div class="col-md-12">

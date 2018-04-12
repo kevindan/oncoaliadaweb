@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	
 	$('#lista_pacientes_').dataTable();
+	$('#panel_datos_fallecido').hide();
+	$('#btn_nuevo_fallecido').hide();
+	$('#btn_guardar_fallecido').hide();
+	
 		
 });
 
@@ -18,14 +22,17 @@ function carga_paciente_(paciente_id) {
 		
 		if(response == 0){ 
 			
-			limpiar();
-			$('#panel_mensaje_fallecido').html('<div class="alert alert-info" align="center" role="alert">Paciente ya tiene registro de variables</div>');
-			 $('#btn_nuevo_hc').show();
+			//limpiar();
+			$('#panel_mensaje_fallecido').html('<div class="alert alert-warning" align="center" role="alert">Paciente aún no tiene registro de variables</div>');
+			$('#btn_nuevo_hc').show();
+			 
+			$('#panel_datos_fallecido').hide();
+				
+			$('#btn_guardar_fallecido').hide();
+			$('#btn_nuevo_fallecido').show();
 			
 		}else{
-			
-			
-			
+						
 			$('#paciente_id').val(response.paciente_id);
 			
 			$('#numero_documento_').val(response.numero_documento);
