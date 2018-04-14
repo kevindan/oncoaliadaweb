@@ -3,6 +3,7 @@ package dao;
 import database.DataAccess;
 import entity.Paciente;
 import entity.PacienteDiag;
+import entity.PacienteFall;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -169,7 +170,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
             //comando sql
             String sql = " select paciente_id,numero_documento,nombres,"
                     + " apellido_paterno,apellido_materno,fecha_nacimiento,usuario "
-                    + " from paciente where eliminado = 0 order by nombres asc ";
+                    + " from paciente where eliminado = 0 and fallecido = 0 order by nombres asc ";
             // crear statement
             Statement stm = cn.createStatement();
             // ejecutar comando y obtener resultados
@@ -586,21 +587,21 @@ public class PacienteDao implements Intermetodos<Paciente> {
         return lista;
     }
 
-    public Paciente BuscarFallecido(Paciente o) throws Exception {
+    public PacienteFall BuscarFallecido(Paciente o) throws Exception {
         Connection cn = null;
-        Paciente p = new Paciente();
+        PacienteFall p = new PacienteFall();
         try {
             cn = DataAccess.getConnection();
 
-            String sql = " select paciente_id,tipo_documento_id,numero_documento, "
-                    + " nombres,apellido_paterno,apellido_materno,sexo,date_format(fecha_nacimiento, '%m/%d/%Y') as fecha_nacimiento, "
-                    + " direccion,telefono, "
-                    + " tipo_paciente, "
-                    + " base_diagnostico_id, "
-                    + " codigo_cieo,codigo_ubigeo,date_format(fecha_diagnostico,'%m/%d/%Y') as fecha_diagnostico,observacion, "
-                    + " date_format(fecha_fallecimiento,'%m/%d/%Y') as fecha_fallecimiento,fallecido_neoplasia,otras_causas "
-                    + " from paciente "
-                    + " where paciente_id = ? and eliminado = 0 and fallecido = 1 ";
+            String sql = " select paciente.paciente_id, paciente.tipo_documento_id,paciente.numero_documento, "
+                    + " paciente.nombres,paciente.apellido_paterno,paciente.apellido_materno,paciente.sexo,date_format(paciente.fecha_nacimiento, '%m/%d/%Y') as fecha_nacimiento, "
+                    + " paciente.direccion,paciente.telefono, "
+                    + " paciente.tipo_paciente, "
+                    + " paciente.base_diagnostico_id, diagnostico.descripcion, "
+                    + " paciente.codigo_cieo,paciente.codigo_ubigeo,date_format(paciente.fecha_diagnostico,'%m/%d/%Y') as fecha_diagnostico,paciente.observacion, "
+                    + " date_format(paciente.fecha_fallecimiento,'%m/%d/%Y') as fecha_fallecimiento,paciente.fallecido_neoplasia,paciente.otras_causas "
+                    + " from paciente, diagnostico "
+                    + " where paciente.codigo_cieo = diagnostico.codigo_cieo and paciente.paciente_id = ? and paciente.eliminado = 0 and paciente.fallecido = 1 ";
 
             PreparedStatement pstm = cn.prepareStatement(sql);
             pstm.setInt(1, o.getPaciente_id());
@@ -627,8 +628,7 @@ public class PacienteDao implements Intermetodos<Paciente> {
                 p.setFecha_fallecimiento(rs.getString("fecha_fallecimiento"));
                 p.setFallecido_neoplasia(rs.getInt("fallecido_neoplasia"));
                 p.setOtras_causas(rs.getString("otras_causas"));
-              
-
+                p.setDescripcion(rs.getString("descripcion"));
             }
             rs.close();
             pstm.close();

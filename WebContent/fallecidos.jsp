@@ -56,7 +56,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-12">
-							<form role="form" id = "formulario_hc">
+							<form role="form" id = "formulario_fallecido">
 								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group" id="div_numero_documento">
@@ -109,6 +109,27 @@
 												Datos del fallecimiento											
 											</div>
 											<div class="panel-body">
+												<div class="row">
+													<div class="col-md-2">
+														<div class="form-group" id="div_fecha_fallecimiento">
+															<label>Fecha. : </label> <input class="form-control" id="fecha_fallecimiento"/>
+														</div>
+													</div>
+													<div class="col-md-2">
+														<div class="form-group">
+															<label>Por Neoplasia:</label> 
+															<select  class="form-control" id="fallecido_neoplasia">
+																<option value="1">Si</option>
+																<option value="0">No</option>																
+															</select>
+														</div> 
+													</div>
+													<div class="col-md-8">
+														<div class="form-group" id="div_otras_causas">
+															<label>Describir otras causas:</label> <input class="form-control" id="otras_causas"/>											
+														</div>
+													</div>																										
+												</div>
 											</div>
 										</div>
 									</div>											
@@ -142,13 +163,13 @@
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				Lista de Pacientes en Seguimiento
+				Lista de Pacientes Fallecidos
 			</div>
 			<div class="panel-body">
 				<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
-								<table class="table table-bordered table-hover table-striped" id="lista_pacientes_hc">
+								<table class="table table-bordered table-hover table-striped" id="lista_pacientes_fallecidos">
 									<thead>
 										<tr class="info">
 											<th>N°</th>									
@@ -156,11 +177,11 @@
 	                						<th>Nombres</th>
 	               							<th>Ap. Paterno</th>
 	                						<th>Ap. Materno</th>
-	               							<th>F. Último Control</th>
+	               							<th>F. Fallecimiento</th>
 	               							<th class="text-center">Opciones</th>
 										</tr>
 									</thead>
-									<tbody id="listado_pacientes_hc">										
+									<tbody id="listado_pacientes_fallecidos">										
 									</tbody>								
 								</table>
 							</div>
@@ -256,7 +277,7 @@
   </div>
 </div>
 <!-- FIN DE VENTANA MODAL PARA ELIMINAR -->		
-	<!-- JQUERY CHECKBOXES -->	
+	<!-- JQUERY CHECKBOXES -->		
 	<script src="js/fallecidos.js"></script>
 	
 </body>

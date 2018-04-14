@@ -61,6 +61,42 @@ public class DiagnosticoDao implements Intermetodos<Diagnostico> {
         }
         return lista;
     }
+    
+    public List<Diagnostico> ListarCieoProstata() throws Exception {
+        Connection cn = null;
+        List<Diagnostico> lista = new ArrayList<Diagnostico>();
+        try {
+            // conexion a la base de datos
+            cn = DataAccess.getConnection();
+            //comando sql
+            String sql = " select codigo_cieo, descripcion, categoria_id from diagnostico "
+                    + " where codigo_cieo in ('C61.X','D07.5','D29.1','D40.0') " 
+                    + "  and eliminado = 0 order by codigo_cieo asc ";
+            // crear statement
+            Statement stm = cn.createStatement();
+            // ejecutar comando y obtener resultados
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Diagnostico d = new Diagnostico();
+                //asignar valores al objeto r
+                d.setCodigo_cieo(rs.getString("codigo_cieo"));
+                d.setDescripcion(rs.getString("descripcion"));
+                d.setCategoria_id(rs.getString("categoria_id"));
+                lista.add(d);
+            }
+            // cerrar cursor
+            rs.close();
+            stm.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
 
     @Override
     public List<Diagnostico> Filtrar(Diagnostico o) throws Exception {

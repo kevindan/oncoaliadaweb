@@ -278,7 +278,7 @@
 						<tbody>
                         <% 
                         	DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
-                            List<Diagnostico> diagnosticos = diagnosticoDao.Listar();
+                            List<Diagnostico> diagnosticos = diagnosticoDao.ListarCieoProstata();
                             String clase="odd gradeX";
                                             	
                             for(Diagnostico diagostico: diagnosticos ) {

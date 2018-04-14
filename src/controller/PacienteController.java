@@ -117,9 +117,7 @@ public class PacienteController extends HttpServlet {
 
 				pacienteDao = new PacienteDao();
 
-				paciente = pacienteDao.BuscarFallecido(paciente);
-
-				String json = new Gson().toJson(paciente);
+				String json = new Gson().toJson(pacienteDao.BuscarFallecido(paciente));
 
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
@@ -212,7 +210,7 @@ public class PacienteController extends HttpServlet {
 				
 				boolean existe = hc_cabeceraDao.ValidaExistencia(paciente);
 				
-				if(existe == true){
+				if(existe == false){
 					
 					pacienteDao = new PacienteDao();
 					pacienteDiag = new PacienteDiag();
@@ -241,6 +239,12 @@ public class PacienteController extends HttpServlet {
 			paciente.setPaciente_id(Integer.parseInt(request.getParameter("paciente_id")));
 
 			try {
+				
+				hc_cabeceraDao = new Hc_cabeceraDao();
+				
+				boolean existe = hc_cabeceraDao.ValidaExistencia(paciente);
+				
+				if(existe == true){
 					
 					pacienteDao = new PacienteDao();
 					pacienteDiag = new PacienteDiag();
@@ -253,6 +257,10 @@ public class PacienteController extends HttpServlet {
 					response.setCharacterEncoding("UTF-8");
 					response.getWriter().write(json);
 					
+				}else{
+					
+					response.getWriter().write("0");
+				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -277,7 +285,40 @@ public class PacienteController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if (opcion.equals("registrar_fallecido")) {
+
+			paciente = new Paciente();
+			
+			if(!(request.getParameter("paciente_id").equals(""))){
+				paciente.setPaciente_id(Integer.parseInt(request.getParameter("paciente_id")));	
+			}
+			
+			paciente.setFecha_fallecimiento(fechaToTexto(textoTofecha(request.getParameter("fecha_fallecimiento"))));
+			
+			if(!(request.getParameter("fallecido_neoplasia").equals(""))){
+				paciente.setFallecido_neoplasia(Integer.parseInt(request.getParameter("fallecido_neoplasia")));	
+			}
+			
+			paciente.setOtras_causas(request.getParameter("otras_causas"));
+			
+			paciente.setUsuario(request.getParameter("usuario"));
+					
+			
+			try {
+				
+				pacienteDao = new PacienteDao();
+				pacienteDao.RegistraFallecido(paciente);
+
+				response.getWriter().write("1");
+			
+			} catch (Exception e) {
+
+				response.getWriter().write("0");
+				e.printStackTrace();
+			}
+
 		}
+		
 
 	}
 
